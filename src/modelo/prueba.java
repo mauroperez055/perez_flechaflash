@@ -32,9 +32,9 @@ public class prueba {
 //        pasajeroData.bajaLogicaPasajero(pasajero);
 //        pasajeroData.altaLogicaPasajero(pasajero);
 
-//        for (Pasajero pas : pasajeroData.listarTodosLosPasajeros()) {
-//            System.out.println(pas.toString());
-//        }
+        for (Pasajero pas : pasajeroData.listarTodosLosPasajeros()) {
+            System.out.println(pas.toString());
+        }
         
 //        for (Pasajero pas : pasajeroData.listarPasajerosActivos()) {
 //            System.out.println(pas.toString());
@@ -44,7 +44,7 @@ public class prueba {
 //            System.out.println(pas.toString());
 //        }
          
-        pasajero.setIdPasajero(3);
-        pasajeroData.eliminarPasajero(pasajero);
+//        pasajero.setIdPasajero(3);
+//        pasajeroData.eliminarPasajero(pasajero);
     }
 }
