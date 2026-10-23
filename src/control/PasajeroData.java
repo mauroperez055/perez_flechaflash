@@ -17,7 +17,8 @@ public class PasajeroData {
     }
     
     public void cargarPasajero(Pasajero pasajero) throws SQLException {
-        String sql = "INSERT INTO pasajeros (dni, nombre, apellido, correo, telefono, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasajeros (dni, nombre, apellido, correo, telefono, estado) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -33,7 +34,7 @@ public class PasajeroData {
             ResultSet rs = ps.getGeneratedKeys();
             
             if (rs.next()) {
-                pasajero.setIdPasajero(1);
+                pasajero.setIdPasajero(rs.getInt(1));
             } else {
                 System.out.println("No se pudo obtener el id del pasajero.");
             }
@@ -71,6 +72,7 @@ public class PasajeroData {
             ps.close();
         } catch (SQLException e) {
             System.out.println("No se pudo encontrar el pasajero." + e.getMessage());
+            throw e;
         }
         return null;
     }
