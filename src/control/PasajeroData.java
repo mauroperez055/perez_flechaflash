@@ -116,10 +116,8 @@ public class PasajeroData {
             
             if (exito == 1) {
                 System.out.println("Pasajero dado de baja correctamente.");
-                return;
             } else {
                 System.out.println("No se encontró el pasajero.");
-                return;
             }
         } catch (SQLException e) {
             System.out.println("No se pudo dar de baja el alumno." + e.getMessage());

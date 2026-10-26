@@ -55,9 +55,28 @@ public class prueba {
         if (objeto instanceof Colectivo) {
             colectivoData = new ColectivoData(conexion);
             Colectivo colectivo = (Colectivo) objeto;
+            
 //            colectivoData.cargarColectivo(colectivo);
+
             Colectivo cole = colectivoData.buscarColectivoMatricula("xyz-789");
-            System.out.println(cole.toString());
+//            cole.setChofer("Leo Ponzio");
+//            System.out.println(cole.toString());
+            
+//            colectivoData.actualizarColectivo(cole);
+            
+//            for (Colectivo cole : colectivoData.listarTodosLosColectivos()) {
+//                System.out.println(cole.toString());
+//            }
+            
+//            for (Colectivo cole : colectivoData.listarColectivosActivos()) {
+//                System.out.println(cole.toString());
+//            }
+
+//            for (Colectivo cole : colectivoData.listarColectivosInactivos()) {
+//                System.out.println(cole.toString());
+//            }
+        
+            colectivoData.eliminarColectivo(cole);
         }
         
     }
