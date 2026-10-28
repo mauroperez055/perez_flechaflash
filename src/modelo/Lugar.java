@@ -3,19 +3,19 @@ package modelo;
 
 public class Lugar {
     private int idLugar;
-    private Colectivo colectivo;
+    private Viaje viaje;
     private int numeroAsiento;
     private boolean activo;
 
-    public Lugar(int idLugar, Colectivo colectivo, int numeroAsiento, boolean activo) {
+    public Lugar(int idLugar, Viaje viaje, int numeroAsiento, boolean activo) {
         this.idLugar = idLugar;
-        this.colectivo = colectivo;
+        this.viaje = viaje;
         this.numeroAsiento = numeroAsiento;
         this.activo = activo;
     }
     
-    public Lugar(Colectivo colectivo, int numeroAsiento, boolean activo) {
-        this.colectivo = colectivo;
+    public Lugar(Viaje viaje, int numeroAsiento, boolean activo) {
+        this.viaje = viaje;
         this.numeroAsiento = numeroAsiento;
         this.activo = activo;
     }
@@ -28,12 +28,12 @@ public class Lugar {
         this.idLugar = idLugar;
     }
 
-    public Colectivo getColectivo() {
-        return colectivo;
+    public Viaje getViaje() {
+        return viaje;
     }
 
-    public void setColectivo(Colectivo colectivo) {
-        this.colectivo = colectivo;
+    public void setViaje(Viaje viaje) {
+        this.viaje = viaje;
     }
 
     public int getNumeroAsiento() {
@@ -56,7 +56,7 @@ public class Lugar {
     public String toString() {
         return "Lugar--" + 
                    "\nidLugar: " + idLugar + ", "
-                + "\ncolectivo: " + colectivo + ", "
+                + "\nviaje: " + viaje + ", "
                 + "\nnumeroAsiento: " + numeroAsiento + ", "
                 + "\nactivo: " + activo;
     }

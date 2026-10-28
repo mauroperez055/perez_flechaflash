@@ -48,7 +48,7 @@ public class ColectivoData {
     }
     
     public Colectivo buscarColectivoMatricula(String matricula) throws SQLException {
-        String sql ="SELECT * FROM colectivos WHERE matricula = ?";
+        String sql = "SELECT * FROM colectivos WHERE matricula = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);

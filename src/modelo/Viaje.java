@@ -2,19 +2,20 @@
 package modelo;
 
 import java.time.LocalTime;
+import java.sql.Time;
 
-public class RutaViaje {
-    private int idRuta;
+public class Viaje {
+    private int idViaje;
     private String origen;
     private String destino;
-    private LocalTime horaSalida;
-    private LocalTime horaLlegada;
+    private Time horaSalida;
+    private Time horaLlegada;
     private Colectivo colectivo;
     private double precio;
     private boolean activo;
 
-    public RutaViaje(int idRuta, String origen, String destino, LocalTime horaSalida, LocalTime horaLlegada, Colectivo colectivo, double precio, boolean activo) {
-        this.idRuta = idRuta;
+    public Viaje(int idViaje, String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+        this.idViaje = idViaje;
         this.origen = origen;
         this.destino = destino;
         this.horaSalida = horaSalida;
@@ -24,7 +25,7 @@ public class RutaViaje {
         this.activo = activo;
     }
     
-    public RutaViaje(String origen, String destino, LocalTime horaSalida, LocalTime horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+    public Viaje(String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
         this.origen = origen;
         this.destino = destino;
         this.horaSalida = horaSalida;
@@ -34,12 +35,12 @@ public class RutaViaje {
         this.activo = activo;
     }
 
-    public int getIdRuta() {
-        return idRuta;
+    public int getIdViaje() {
+        return idViaje;
     }
 
-    public void setIdRuta(int idRuta) {
-        this.idRuta = idRuta;
+    public void setIdViaje(int idViaje) {
+        this.idViaje = idViaje;
     }
 
     public String getOrigen() {
@@ -58,19 +59,19 @@ public class RutaViaje {
         this.destino = destino;
     }
 
-    public LocalTime getHoraSalida() {
+    public Time getHoraSalida() {
         return horaSalida;
     }
 
-    public void setHoraSalida(LocalTime horaSalida) {
+    public void setHoraSalida(Time horaSalida) {
         this.horaSalida = horaSalida;
     }
 
-    public LocalTime getHoraLlegada() {
+    public Time getHoraLlegada() {
         return horaLlegada;
     }
 
-    public void setHoraLlegada(LocalTime horaLlegada) {
+    public void setHoraLlegada(Time horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
 
@@ -100,15 +101,15 @@ public class RutaViaje {
 
     @Override
     public String toString() {
-        return "RutaViaje--" + 
-                   "\nidRuta: " + idRuta + ", "
+        return "Viaje--" + 
+                   "\nidViaje: " + idViaje + ", "
                 + "\norigen: " + origen + ", "
                 + "\ndestino: " + destino + ", "
                 + "\nhoraSalida: " + horaSalida + ", "
                 + "\nhoraLlegada: " + horaLlegada + ", "
-                + "\ncolectivo: " + colectivo + ", "
                 + "\nprecio: " + precio + ", "
-                + "\nactivo: " + activo;
+                + "\nactivo: " + activo + ", "
+                + "\ncolectivo: " + colectivo;
     }
     
     
