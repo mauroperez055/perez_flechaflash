@@ -63,7 +63,8 @@ public class prueba {
 //
 //            colectivoData.cargarColectivo(colectivo);
 //
-            Colectivo cole = colectivoData.buscarColectivoMatricula("ab-123-cd");
+            Colectivo cole = colectivoData.buscarColectivoMatricula("lig-219");
+            
             new prueba().conectarViaje(cole);
 //            cole.setChofer("Leo Ponzio");
             
@@ -90,18 +91,28 @@ public class prueba {
         conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
         viajeData = new ViajeData(conexion);
         
-//        Viaje viaje = new Viaje("Villa Mercedes", "Córdoba", Time.valueOf("21:00:00"), Time.valueOf("05:30:00"), cole, 50000, true);
+        Viaje viaje = new Viaje("Villa Mercedes", "Córdoba", Time.valueOf("21:00:00"), Time.valueOf("05:30:00"), cole, 50000, true);
 //        viajeData.cargarViaje(viaje);
-//        viaje.setIdViaje(10);
-//        Viaje viajeEnc = viajeData.buscarViaje(viaje);
+        viaje.setIdViaje(11);
+        Viaje viajeEnc = viajeData.buscarViaje(viaje);
+//        viajeEnc.setColectivo(cole);
 //        System.out.println(viajeEnc.toString());
 
 //        for (Viaje viaje : viajeData.listarViajeOrigen("merce")) {
 //            System.out.println(viaje.toString());
 //        }
 
-        for (Viaje viaje : viajeData.listarViajeDestino("san luis")) {
-            System.out.println(viaje.toString());
-        }
+//        for (Viaje viaje : viajeData.listarViajeDestino("san luis")) {
+//            System.out.println(viaje.toString());
+//        }
+        
+//        for (Viaje viaje : viajeData.listarViajesActivos()) {
+//            System.out.println(viaje.toString());
+//        }
+        
+//        viajeData.actualizarViaje(viajeEnc);
+//        viajeData.eliminarViaje(viajeEnc);
+//        viajeData.bajaLógicaViaje(viajeEnc);
+        viajeData.altaLógicaViaje(viajeEnc);
     }
 }
