@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import modelo.Colectivo;
+import modelo.Viaje;
 
 public class ColectivoData {
     private Connection conexion = null;
@@ -142,6 +144,26 @@ public class ColectivoData {
         }
     }
     
+    public void eliminarColectivo(Colectivo colectivo) throws SQLException {
+        String sql = "DELETE FROM colectivos WHERE idColectivo = ?";
+        
+        try {
+           PreparedStatement ps = conexion.prepareStatement(sql);
+           ps.setInt(1, colectivo.getIdColectivo());
+           
+           int exito = ps.executeUpdate();
+           
+           if (exito == 1) {
+               System.out.println("Colectivo eliminado correctamente.");
+           } else {
+               System.out.println("No se pudo eliminar el colectivo.");
+           }
+       } catch (SQLException e) {
+            System.out.println("No se pudo encontrar el colectivo." + e.getMessage());
+            throw e;
+       }
+    }
+    
     public ArrayList<Colectivo> listarTodosLosColectivos() throws SQLException {
         ArrayList<Colectivo> todosLosColectivos = new ArrayList<>();
        String sql = "SELECT * FROM colectivos";
@@ -225,25 +247,5 @@ public class ColectivoData {
            throw e;
        }
     }
-    
-    
-    public void eliminarColectivo(Colectivo colectivo) throws SQLException {
-        String sql = "DELETE FROM colectivos WHERE idColectivo = ?";
-        
-        try {
-           PreparedStatement ps = conexion.prepareStatement(sql);
-           ps.setInt(1, colectivo.getIdColectivo());
-           
-           int exito = ps.executeUpdate();
-           
-           if (exito == 1) {
-               System.out.println("Colectivo eliminado correctamente.");
-           } else {
-               System.out.println("No se pudo eliminar el colectivo.");
-           }
-       } catch (SQLException e) {
-            System.out.println("No se pudo encontrar el colectivo." + e.getMessage());
-            throw e;
-       }
-    }
+
 }

@@ -10,6 +10,9 @@ public class Colectivo {
     private String chofer;
     private boolean activo;
 
+    public Colectivo() {
+    }
+
     public Colectivo(int idColectivo, String matricula, String marca, String modelo, int capacidad, String chofer, boolean activo) {
         this.idColectivo = idColectivo;
         this.matricula = matricula;

@@ -147,6 +147,26 @@ public class PasajeroData {
         }
     }
    
+   public void eliminarPasajero(Pasajero pasajero) throws SQLException {
+        String sql = "DELETE FROM pasajeros WHERE idPasajero = ?";
+        
+        try {
+           PreparedStatement ps = conexion.prepareStatement(sql);
+           ps.setInt(1, pasajero.getIdPasajero());
+           
+           int exito = ps.executeUpdate();
+           
+           if (exito == 1) {
+               System.out.println("Pasajero eliminado correctamente.");
+           } else {
+               System.out.println("No se pudo eliminar el pasajero.");
+           }
+       } catch (SQLException e) {
+            System.out.println("No se pudo encontrar el alumno." + e.getMessage());
+            throw e;
+       }
+    }
+   
    public ArrayList<Pasajero> listarTodosLosPasajeros() throws SQLException{
        ArrayList<Pasajero> todosLosPasajeros = new ArrayList<>();
        String sql = "SELECT * FROM pasajeros";
@@ -231,23 +251,4 @@ public class PasajeroData {
        }
    }
    
-   public void eliminarPasajero(Pasajero pasajero) throws SQLException {
-        String sql = "DELETE FROM pasajeros WHERE idPasajero = ?";
-        
-        try {
-           PreparedStatement ps = conexion.prepareStatement(sql);
-           ps.setInt(1, pasajero.getIdPasajero());
-           
-           int exito = ps.executeUpdate();
-           
-           if (exito == 1) {
-               System.out.println("Pasajero eliminado correctamente.");
-           } else {
-               System.out.println("No se pudo eliminar el pasajero.");
-           }
-       } catch (SQLException e) {
-            System.out.println("No se pudo encontrar el alumno." + e.getMessage());
-            throw e;
-       }
-    }
 }

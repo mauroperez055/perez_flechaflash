@@ -7,6 +7,10 @@ import control.PasajeroData;
 import control.ViajeData;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.HashMap;
+import java.util.Map;
 
 public class prueba {
     
@@ -19,6 +23,7 @@ public class prueba {
         // TODO code application logic here
         Pasajero pasajero = new Pasajero(38749011, "Mauro Gabriel", "Perez", "mauroperez055@gmail.com", "2657285374", true);
         Colectivo colectivo = new Colectivo("AB-123-CD", "Mercedes Benz", "2026", 62, "Chano", true);
+//        Colectivo colectivo = new Colectivo();
         
         new prueba().conectarPasajero(pasajero);
         new prueba().conectarColectivo(colectivo);
@@ -65,7 +70,7 @@ public class prueba {
 //
             Colectivo cole = colectivoData.buscarColectivoMatricula("lig-219");
             
-            new prueba().conectarViaje(cole);
+            this.conectarViaje(cole);
 //            cole.setChofer("Leo Ponzio");
             
             
@@ -91,10 +96,10 @@ public class prueba {
         conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
         viajeData = new ViajeData(conexion);
         
-        Viaje viaje = new Viaje("Villa Mercedes", "Córdoba", Time.valueOf("21:00:00"), Time.valueOf("05:30:00"), cole, 50000, true);
-//        viajeData.cargarViaje(viaje);
-        viaje.setIdViaje(11);
-        Viaje viajeEnc = viajeData.buscarViaje(viaje);
+        Viaje viaje = new Viaje("San Luis", "Villa Mercedes", LocalDate.of(2026, Month.NOVEMBER, 25), LocalDate.of(2026, Month.NOVEMBER, 25), Time.valueOf("08:15:00"), Time.valueOf("09:30:00"), cole, 80000, true);
+        viajeData.cargarViaje(viaje);
+//        viaje.setIdViaje(11);
+//        Viaje viajeEnc = viajeData.buscarViaje(viaje);
 //        viajeEnc.setColectivo(cole);
 //        System.out.println(viajeEnc.toString());
 
@@ -113,6 +118,18 @@ public class prueba {
 //        viajeData.actualizarViaje(viajeEnc);
 //        viajeData.eliminarViaje(viajeEnc);
 //        viajeData.bajaLógicaViaje(viajeEnc);
-        viajeData.altaLógicaViaje(viajeEnc);
+//        viajeData.altaLógicaViaje(viajeEnc);
+
+        HashMap<Colectivo, Viaje> coleConViaje = colectivoData.listarColectivosConViaje();
+//        
+        for (Map.Entry<Colectivo, Viaje> entry : coleConViaje.entrySet()) {
+            System.out.println("n° cole: " + entry.getKey().getIdColectivo() + "\nchofer:  " + entry.getKey().getChofer() 
+                                            + " \n origen: " + entry.getValue().getOrigen() 
+                                            + "\n destino: " + entry.getValue().getDestino() 
+                                            + "\n fechaSalida: " + entry.getValue().getFechaSalida()
+                                            + "\n horaSalida: " + entry.getValue().getHoraSalida() 
+                                            + "\n fechaLlegada: " + entry.getValue().getFechaLlegada()
+                                            + "\n horaLlegada: " + entry.getValue().getHoraLlegada());
+        }
     }
 }
