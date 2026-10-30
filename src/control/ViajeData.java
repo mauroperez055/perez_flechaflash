@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
 import modelo.Colectivo;
 import modelo.Viaje;
 
@@ -54,7 +53,7 @@ public class ViajeData {
         }
     }
 
-    public Viaje buscarViaje(Viaje viaje) throws SQLException {
+    public Viaje buscarViaje(int idViaje) throws SQLException {
         String sql = "SELECT v.idViaje, v.origen, v.destino, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
@@ -63,12 +62,12 @@ public class ViajeData {
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, viaje.getIdViaje());
+            ps.setInt(1, idViaje);
             
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                int idViaje = rs.getInt("idVIaje");
+                int idV = rs.getInt("idVIaje");
                 String origen = rs.getString("origen");
                 String destino = rs.getString("destino");
                 LocalDate fechaSalida = rs.getDate("fechaSalida").toLocalDate();
@@ -88,10 +87,11 @@ public class ViajeData {
                 
                 Colectivo colectivo = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
                 
-                Viaje viajeEncontrado = new Viaje(idViaje, origen, destino, fechaSalida, fechaLlegada, horaSalida, horaLlegada, colectivo, precio, estado);
+                Viaje viajeEncontrado = new Viaje(idV, origen, destino, fechaSalida, fechaLlegada, horaSalida, horaLlegada, colectivo, precio, estado);
                 return viajeEncontrado;
             }
             
+            ps.close();
         } catch (SQLException e) {
             System.out.println("No se pudo encontrar el viaje." + e.getMessage());
             throw e;

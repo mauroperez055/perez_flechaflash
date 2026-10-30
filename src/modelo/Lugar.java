@@ -6,6 +6,9 @@ public class Lugar {
     private Viaje viaje;
     private int numeroAsiento;
     private boolean activo;
+    
+    public Lugar() {
+    }
 
     public Lugar(int idLugar, Viaje viaje, int numeroAsiento, boolean activo) {
         this.idLugar = idLugar;
@@ -56,9 +59,9 @@ public class Lugar {
     public String toString() {
         return "Lugar--" + 
                    "\nidLugar: " + idLugar + ", "
-                + "\nviaje: " + viaje + ", "
                 + "\nnumeroAsiento: " + numeroAsiento + ", "
-                + "\nactivo: " + activo;
+                + "\nactivo: " + activo
+                + "\n" + viaje;
     }
     
     
