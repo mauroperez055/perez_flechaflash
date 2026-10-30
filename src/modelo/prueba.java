@@ -134,8 +134,11 @@ public class prueba {
 //        Lugar lugar = new Lugar(viaje, 9, true);
 //        lugarData.crearLugar(lugar);
 
-        Lugar lugar = lugarData.buscarLugarDeUnViaje(3, viaje);
-        
-        System.out.println(lugar.toString());
+//        Lugar lugar = lugarData.buscarLugarDeUnViaje(25, viaje);
+//        lugar.setNumeroAsiento(7);
+//        lugarData.actualizarLugar(lugar);
+//        lugarData.eliminarLugar(1);
+//        lugarData.bajaLogicaLugar(2);
+        lugarData.altaLogicaLugar(2);
     }
 }

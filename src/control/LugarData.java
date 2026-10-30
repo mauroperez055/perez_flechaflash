@@ -77,4 +77,89 @@ public class LugarData {
         return null;
     }
     
+    public void actualizarLugar(Lugar lugar) throws SQLException {
+        String sql = "UPDATE lugares SET numeroAsiento = ? WHERE idLugar = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, lugar.getNumeroAsiento());
+            ps.setInt(3, lugar.getIdLugar());
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1){
+                System.out.println("Lugar actualizado correctamente.");
+            } else {
+                System.out.println("No se encontro el lugar");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualizar el lugar." + e.getMessage());
+            throw e;
+        }
+    }
+    
+    public void eliminarLugar(int idLugar) throws SQLException {
+        String sql = "DELETE FROM lugares WHERE idLugar = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idLugar);
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                System.out.println("Lugar eliminado correctamente.");
+            } else {
+                System.out.println("No se pudo eliminar el lugar.");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("No se encontro el lugar." + e.getMessage());
+            throw e;
+        }
+    }
+    
+    public void bajaLogicaLugar(int idLugar) throws SQLException {
+            String sql = "UPDATE lugares SET estado = 0 WHERE idLugar = ?";
+            
+            try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idLugar);
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1){
+                System.out.println("Lugar dado de baja correctamente.");
+            } else {
+                System.out.println("No se encontro el lugar");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo dar de baja el lugar." + e.getMessage());
+            throw e;
+        }
+    }
+    
+    public void altaLogicaLugar(int idLugar) throws SQLException {
+            String sql = "UPDATE lugares SET estado = 1 WHERE idLugar = ?";
+            
+            try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idLugar);
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1){
+                System.out.println("Lugar dado de alta correctamente.");
+            } else {
+                System.out.println("No se encontro el lugar");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo dar de alta el lugar." + e.getMessage());
+            throw e;
+        }
+    }
+    
 }
