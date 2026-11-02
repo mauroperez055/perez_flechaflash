@@ -4,11 +4,13 @@ package modelo;
 import control.ColectivoData;
 import control.Conexion;
 import control.LugarData;
+import control.PasajeData;
 import control.PasajeroData;
 import control.ViajeData;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ public class prueba {
     private ColectivoData colectivoData;
     private ViajeData viajeData;
     private LugarData lugarData;
+    private PasajeData pasajeData;
 
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
@@ -42,7 +45,7 @@ public class prueba {
 //        System.out.println(pasajeroEncontrado.toString());
 //        pasajeroData.actualizarPasajero(pasajero);
 //            
-//        pasajero.setIdPasajero(1);
+        pasajero.setIdPasajero(1);
 //        pasajeroData.bajaLogicaPasajero(pasajero);
 //        pasajeroData.altaLogicaPasajero(pasajero);
 //
@@ -131,14 +134,14 @@ public class prueba {
         conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
         lugarData = new LugarData(conexion);
         
-//        Lugar lugar = new Lugar(viaje, 9, true);
+        Lugar lugar = new Lugar(viaje, 9, true);
 //        lugarData.crearLugar(lugar);
-
 //        Lugar lugar = lugarData.buscarLugarDeUnViaje(25, viaje);
 //        lugar.setNumeroAsiento(7);
 //        lugarData.actualizarLugar(lugar);
 //        lugarData.eliminarLugar(1);
 //        lugarData.bajaLogicaLugar(2);
-        lugarData.altaLogicaLugar(2);
+//        lugarData.altaLogicaLugar(2);
     }
+
 }
