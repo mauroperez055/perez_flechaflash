@@ -8,12 +8,12 @@ package vista;
  *
  * @author Mauro Perez
  */
-public class FormPasajero extends javax.swing.JInternalFrame {
+public class RegistrarPasajero extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FormPasajero
      */
-    public FormPasajero() {
+    public RegistrarPasajero() {
         initComponents();
     }
 
@@ -43,24 +43,24 @@ public class FormPasajero extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Pasajero");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel1.setText("Cargar Pasajero");
 
         pnlDatosPasajero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("Apellido/s:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("Nombre/s:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setText("Dni:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("Correo:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Teléfono:");
 
         javax.swing.GroupLayout pnlDatosPasajeroLayout = new javax.swing.GroupLayout(pnlDatosPasajero);
@@ -82,7 +82,7 @@ public class FormPasajero extends javax.swing.JInternalFrame {
                     .addComponent(txtDNI)
                     .addComponent(txtCorreo)
                     .addComponent(txtTelefono))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pnlDatosPasajeroLayout.setVerticalGroup(
             pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +110,7 @@ public class FormPasajero extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnGuardarPasajero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGuardarPasajero.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnGuardarPasajero.setText("Guardar pasajero");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,7 +126,7 @@ public class FormPasajero extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(123, 123, 123)
                 .addComponent(btnGuardarPasajero)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -139,7 +139,7 @@ public class FormPasajero extends javax.swing.JInternalFrame {
                 .addComponent(pnlDatosPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnGuardarPasajero)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
