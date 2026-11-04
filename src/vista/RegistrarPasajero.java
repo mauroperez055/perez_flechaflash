@@ -44,7 +44,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         setTitle("Pasajero");
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel1.setText("Cargar Pasajero");
+        jLabel1.setText("Registrar Pasajero");
 
         pnlDatosPasajero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
