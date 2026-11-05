@@ -34,8 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnBuscarCole = new javax.swing.JButton();
         btnListarCole = new javax.swing.JButton();
         btnRegistrarViaje = new javax.swing.JButton();
-        btnListarViajesOrigen = new javax.swing.JButton();
-        btnListarViajesDestino = new javax.swing.JButton();
+        btnListarViajes = new javax.swing.JButton();
         btnRegistrarLugar = new javax.swing.JButton();
         btnBuscarLugar = new javax.swing.JButton();
         btnListarLugares = new javax.swing.JButton();
@@ -201,33 +200,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnListarViajesOrigen.setBackground(new java.awt.Color(49, 144, 127));
-        btnListarViajesOrigen.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnListarViajesOrigen.setForeground(new java.awt.Color(0, 0, 0));
-        btnListarViajesOrigen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
-        btnListarViajesOrigen.setText("Listar viajes desde un Origen");
-        btnListarViajesOrigen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnListarViajesOrigen.setContentAreaFilled(false);
-        btnListarViajesOrigen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnListarViajesOrigen.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarViajesOrigen.addActionListener(new java.awt.event.ActionListener() {
+        btnListarViajes.setBackground(new java.awt.Color(49, 144, 127));
+        btnListarViajes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnListarViajes.setForeground(new java.awt.Color(0, 0, 0));
+        btnListarViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
+        btnListarViajes.setText("Listados de viajes");
+        btnListarViajes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnListarViajes.setContentAreaFilled(false);
+        btnListarViajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListarViajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListarViajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarViajesOrigenActionPerformed(evt);
-            }
-        });
-
-        btnListarViajesDestino.setBackground(new java.awt.Color(49, 144, 127));
-        btnListarViajesDestino.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnListarViajesDestino.setForeground(new java.awt.Color(0, 0, 0));
-        btnListarViajesDestino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
-        btnListarViajesDestino.setText("Listar viajes hacia un Destino");
-        btnListarViajesDestino.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnListarViajesDestino.setContentAreaFilled(false);
-        btnListarViajesDestino.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnListarViajesDestino.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarViajesDestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarViajesDestinoActionPerformed(evt);
+                btnListarViajesActionPerformed(evt);
             }
         });
 
@@ -355,9 +339,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                         .addComponent(btnBuscarCole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnListarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarViajesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarViajesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnListarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,9 +382,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrarViaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListarViajesOrigen)
-                .addGap(12, 12, 12)
-                .addComponent(btnListarViajesDestino)
+                .addComponent(btnListarViajes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
@@ -422,7 +403,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarPasaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarPasajes)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -520,27 +501,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
     }//GEN-LAST:event_btnRegistrarViajeActionPerformed
 
-    private void btnListarViajesOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarViajesOrigenActionPerformed
+    private void btnListarViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarViajesActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        ListarViajesOrigen listarViajeOrigen = new ListarViajesOrigen();
-        listarViajeOrigen.setVisible(true);
-        escritorio.add(listarViajeOrigen);
-        listarViajeOrigen.moveToFront();
+        ListarViajes listarViajes = new ListarViajes();
+        listarViajes.setVisible(true);
+        escritorio.add(listarViajes);
+        listarViajes.moveToFront();
         escritorio.revalidate();
         escritorio.repaint();
-    }//GEN-LAST:event_btnListarViajesOrigenActionPerformed
-
-    private void btnListarViajesDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarViajesDestinoActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
-        ListarViajesDestino listarViajeDestino = new ListarViajesDestino();
-        listarViajeDestino.setVisible(true);
-        escritorio.add(listarViajeDestino);
-        listarViajeDestino.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
-    }//GEN-LAST:event_btnListarViajesDestinoActionPerformed
+    }//GEN-LAST:event_btnListarViajesActionPerformed
 
     private void btnRegistrarLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLugarActionPerformed
         // TODO add your handling code here:
@@ -598,8 +568,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnListarLugares;
     private javax.swing.JButton btnListarPasajeros;
     private javax.swing.JButton btnListarPasajes;
-    private javax.swing.JButton btnListarViajesDestino;
-    private javax.swing.JButton btnListarViajesOrigen;
+    private javax.swing.JButton btnListarViajes;
     private javax.swing.JButton btnRegistrarCole;
     private javax.swing.JButton btnRegistrarLugar;
     private javax.swing.JButton btnRegistrarPasajero;

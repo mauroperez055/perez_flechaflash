@@ -118,9 +118,8 @@
                                           <Component id="btnListarCole" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel24" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
-                                      <Component id="btnListarViajesOrigen" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                                      <Component id="btnListarViajes" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnRegistrarViaje" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                                      <Component id="btnListarViajesDestino" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnRegistrarLugar" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnBuscarLugar" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnListarLugares" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
@@ -169,10 +168,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnRegistrarViaje" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnListarViajesOrigen" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="btnListarViajesDestino" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnListarViajes" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -192,7 +189,7 @@
                   <Component id="btnBuscarPasaje" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnListarPasajes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -502,7 +499,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarViajeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnListarViajesOrigen">
+        <Component class="javax.swing.JButton" name="btnListarViajes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7f" green="90" red="31" type="rgb"/>
@@ -516,7 +513,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/list.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Listar viajes desde un Origen"/>
+            <Property name="text" type="java.lang.String" value="Listados de viajes"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder/>
@@ -529,37 +526,7 @@
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarViajesOrigenActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnListarViajesDestino">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="7f" green="90" red="31" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial Rounded MT Bold" size="14" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/list.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Listar viajes hacia un Destino"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder/>
-              </Border>
-            </Property>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarViajesDestinoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarViajesActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistrarLugar">
