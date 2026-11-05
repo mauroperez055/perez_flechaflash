@@ -1,6 +1,10 @@
 
 package vista;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class VistaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
@@ -14,7 +18,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/img/fondo.png"));
+        Image miImagen = icono.getImage();
+        escritorio = new javax.swing.JDesktopPane() {
+            public void paintComponent (Graphics g) {
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         pnlForms = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -47,8 +57,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(200, 70));
         setPreferredSize(new java.awt.Dimension(1100, 725));
-
-        escritorio.setBackground(new java.awt.Color(0, 102, 204));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
