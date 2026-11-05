@@ -188,69 +188,32 @@ public class ViajeData {
        }
     }
     
-    /* Listar rutas activas desde un origen con su colectivo y chofer */
+    /* Llama al metodo privado para obtener los viajes activos desde un origen */
     public ArrayList<Viaje> listarViajeOrigen(String origen) throws SQLException {
-        ArrayList<Viaje> viajesOrigen = new ArrayList<>();
-        String sql = "SELECT v.idViaje, v.origen, v.destino, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
-                        + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
-                        + "FROM viajes v "
-                        + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
-                        + "WHERE v.origen "
-                        + "LIKE ? "
-                        + "AND v.estado = 1";
-        
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, "%" + origen + "%");
-            
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                int idViaje = rs.getInt("idVIaje");
-                String origenViaje = rs.getString("origen");
-                String destino = rs.getString("destino");
-                LocalDate fechaSalida = rs.getDate("fechaSalida").toLocalDate();
-                LocalDate fechaLlegada = rs.getDate("fechaLlegada").toLocalDate();
-                Time horaSalida = rs.getTime("horaSalida");
-                Time horaLlegada = rs.getTime("horaLlegada");
-                double precio = rs.getDouble("precio");
-                boolean estado = rs.getBoolean("estadoViaje");
-                
-                int idColectivo = rs.getInt("idColectivo");
-                String matricula = rs.getString("matricula");
-                String marca = rs.getString("marca");
-                String modelo = rs.getString("modelo");
-                int capacidad = rs.getInt("capacidad");
-                String chofer = rs.getString("chofer");
-                boolean estadoCole = rs.getBoolean("estadoCole");
-                
-                Colectivo cole = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
-                Viaje viaje = new Viaje(idViaje, origenViaje, destino, fechaSalida, fechaLlegada, horaSalida, horaLlegada, cole, precio, estado);
-                
-                viajesOrigen.add(viaje);
-            }
-            
-            return viajesOrigen;
-        } catch (SQLException e) {
-            System.out.println("No se pudo encontrar los viajes." + e.getMessage());
-            throw e;
-        }
+        return listarViajesPorCriterio("origen",  origen);
     }
     
-    /* Listar rutas activas hacia un destino con su colectivo y chofer */
+    /* Llama al metodo privado para obtener los viajes activos hacia un destino */
     public ArrayList<Viaje> listarViajeDestino(String destino) throws SQLException {
-        ArrayList<Viaje> viajesDestino = new ArrayList<>();
+        return listarViajesPorCriterio("destino",  destino);
+    }
+    
+    /* 
+        Metodo privado que recibe un criterio de busqueda (origen o destino) 
+        y un valor que toma el origen o el destino y devuelve una lista de viajes activos
+    */
+    private ArrayList<Viaje> listarViajesPorCriterio(String criterio, String valor) throws SQLException {
+        ArrayList<Viaje> viajesCriterio = new ArrayList<>();
         String sql = "SELECT v.idViaje, v.origen, v.destino, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
-                        + "WHERE v.destino "
-                        + "LIKE ? "
+                        + "WHERE v." + criterio + " LIKE ? "
                         + "AND v.estado = 1";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, "%" + destino + "%");
+            ps.setString(1, "%" + valor + "%");
             
             ResultSet rs = ps.executeQuery();
             
@@ -276,10 +239,10 @@ public class ViajeData {
                 Colectivo cole = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
                 Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, fechaSalida, fechaLlegada, horaSalida, horaLlegada, cole, precio, estado);
                 
-                viajesDestino.add(viaje);
+                viajesCriterio.add(viaje);
             }
             
-            return viajesDestino;
+            return viajesCriterio;
         } catch (SQLException e) {
             System.out.println("No se pudo encontrar los viajes." + e.getMessage());
             throw e;

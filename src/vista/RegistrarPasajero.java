@@ -68,7 +68,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         pnlDatosPasajeroLayout.setHorizontalGroup(
             pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosPasajeroLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(122, 122, 122)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel3)
@@ -77,12 +77,12 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(txtApellido)
                     .addComponent(txtNombre)
                     .addComponent(txtDNI)
                     .addComponent(txtCorreo)
-                    .addComponent(txtTelefono))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         pnlDatosPasajeroLayout.setVerticalGroup(
             pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,10 +125,10 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardarPasajero)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(242, 242, 242))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +137,9 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(pnlDatosPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuardarPasajero)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
