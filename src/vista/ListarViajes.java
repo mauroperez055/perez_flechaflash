@@ -56,7 +56,7 @@ public class ListarViajes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID viaje", "ORIGEN", "Destino", "Fecha Salida", "Hora Salida", "Fecha Llegada", "Hora Llegada", "Colectivo", "Chofer", "Precio base"
+                "ID viaje", "Origen", "Destino", "Fecha Salida", "Hora Salida", "Fecha Llegada", "Hora Llegada", "Colectivo", "Chofer", "Precio base"
             }
         ) {
             boolean[] canEdit = new boolean [] {

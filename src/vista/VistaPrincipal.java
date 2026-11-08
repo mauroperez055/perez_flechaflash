@@ -45,12 +45,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnListarCole = new javax.swing.JButton();
         btnRegistrarViaje = new javax.swing.JButton();
         btnListarViajes = new javax.swing.JButton();
-        btnRegistrarLugar = new javax.swing.JButton();
-        btnBuscarLugar = new javax.swing.JButton();
-        btnListarLugares = new javax.swing.JButton();
+        btnConsultarLugares = new javax.swing.JButton();
         btnEmitirPasaje = new javax.swing.JButton();
         btnBuscarPasaje = new javax.swing.JButton();
         btnListarPasajes = new javax.swing.JButton();
+        btnInformesCole = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlechaFlash");
@@ -223,50 +222,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrarLugar.setBackground(new java.awt.Color(49, 144, 127));
-        btnRegistrarLugar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnRegistrarLugar.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegistrarLugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-seat.png"))); // NOI18N
-        btnRegistrarLugar.setText("Registrar lugar");
-        btnRegistrarLugar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnRegistrarLugar.setContentAreaFilled(false);
-        btnRegistrarLugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrarLugar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnRegistrarLugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarLugarActionPerformed(evt);
-            }
-        });
-
-        btnBuscarLugar.setBackground(new java.awt.Color(49, 144, 127));
-        btnBuscarLugar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnBuscarLugar.setForeground(new java.awt.Color(0, 0, 0));
-        btnBuscarLugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
-        btnBuscarLugar.setText("Buscar lugar");
-        btnBuscarLugar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnBuscarLugar.setContentAreaFilled(false);
-        btnBuscarLugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarLugar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBuscarLugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarLugarActionPerformed(evt);
-            }
-        });
-
-        btnListarLugares.setBackground(new java.awt.Color(49, 144, 127));
-        btnListarLugares.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnListarLugares.setForeground(new java.awt.Color(0, 0, 0));
-        btnListarLugares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
-        btnListarLugares.setText("Listado de lugares");
-        btnListarLugares.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnListarLugares.setContentAreaFilled(false);
-        btnListarLugares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnListarLugares.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarLugares.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarLugaresActionPerformed(evt);
-            }
-        });
+        btnConsultarLugares.setBackground(new java.awt.Color(49, 144, 127));
+        btnConsultarLugares.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnConsultarLugares.setForeground(new java.awt.Color(0, 0, 0));
+        btnConsultarLugares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
+        btnConsultarLugares.setText("Consultar lugares");
+        btnConsultarLugares.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnConsultarLugares.setContentAreaFilled(false);
+        btnConsultarLugares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultarLugares.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         btnEmitirPasaje.setBackground(new java.awt.Color(49, 144, 127));
         btnEmitirPasaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -277,11 +241,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnEmitirPasaje.setContentAreaFilled(false);
         btnEmitirPasaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEmitirPasaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEmitirPasaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmitirPasajeActionPerformed(evt);
-            }
-        });
 
         btnBuscarPasaje.setBackground(new java.awt.Color(49, 144, 127));
         btnBuscarPasaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -292,11 +251,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnBuscarPasaje.setContentAreaFilled(false);
         btnBuscarPasaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarPasaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnBuscarPasaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPasajeActionPerformed(evt);
-            }
-        });
 
         btnListarPasajes.setBackground(new java.awt.Color(49, 144, 127));
         btnListarPasajes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -307,9 +261,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnListarPasajes.setContentAreaFilled(false);
         btnListarPasajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnListarPasajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarPasajes.addActionListener(new java.awt.event.ActionListener() {
+
+        btnInformesCole.setBackground(new java.awt.Color(49, 144, 127));
+        btnInformesCole.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnInformesCole.setForeground(new java.awt.Color(0, 0, 0));
+        btnInformesCole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/table.png"))); // NOI18N
+        btnInformesCole.setText("Informe de colectivos ");
+        btnInformesCole.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnInformesCole.setContentAreaFilled(false);
+        btnInformesCole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInformesCole.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnInformesCole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarPasajesActionPerformed(evt);
+                btnInformesColeActionPerformed(evt);
             }
         });
 
@@ -319,14 +283,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormsLayout.createSequentialGroup()
                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlFormsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator3)
-                            .addComponent(jSeparator4)
-                            .addComponent(jSeparator5)))
                     .addGroup(pnlFormsLayout.createSequentialGroup()
                         .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFormsLayout.createSequentialGroup()
@@ -346,16 +302,27 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                         .addComponent(btnRegistrarCole, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                                         .addComponent(btnBuscarCole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnListarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegistrarLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBuscarLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlFormsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator4)
+                            .addComponent(jSeparator5)
+                            .addComponent(jSeparator3)
+                            .addGroup(pnlFormsLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarPasajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(btnListarPasajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlFormsLayout.setVerticalGroup(
@@ -383,7 +350,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarCole)
                 .addGap(12, 12, 12)
                 .addComponent(btnListarCole)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnInformesCole)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel16)
@@ -396,11 +365,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarLugar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscarLugar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListarLugares)
+                .addComponent(btnConsultarLugares)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -411,7 +376,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarPasaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarPasajes)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -520,29 +485,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
     }//GEN-LAST:event_btnListarViajesActionPerformed
 
-    private void btnRegistrarLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLugarActionPerformed
+    private void btnInformesColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesColeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarLugarActionPerformed
-
-    private void btnBuscarLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLugarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarLugarActionPerformed
-
-    private void btnListarLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarLugaresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarLugaresActionPerformed
-
-    private void btnEmitirPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirPasajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEmitirPasajeActionPerformed
-
-    private void btnBuscarPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPasajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarPasajeActionPerformed
-
-    private void btnListarPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarPasajesActionPerformed
+        escritorio.removeAll();
+        InformeColectivos informeColes = new InformeColectivos();
+        informeColes.setVisible(true);
+        escritorio.add(informeColes);
+        informeColes.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnInformesColeActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -568,17 +520,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCole;
-    private javax.swing.JButton btnBuscarLugar;
     private javax.swing.JButton btnBuscarPasaje;
     private javax.swing.JButton btnBuscarPasajero;
+    private javax.swing.JButton btnConsultarLugares;
     private javax.swing.JButton btnEmitirPasaje;
+    private javax.swing.JButton btnInformesCole;
     private javax.swing.JButton btnListarCole;
-    private javax.swing.JButton btnListarLugares;
     private javax.swing.JButton btnListarPasajeros;
     private javax.swing.JButton btnListarPasajes;
     private javax.swing.JButton btnListarViajes;
     private javax.swing.JButton btnRegistrarCole;
-    private javax.swing.JButton btnRegistrarLugar;
     private javax.swing.JButton btnRegistrarPasajero;
     private javax.swing.JButton btnRegistrarViaje;
     private javax.swing.JDesktopPane escritorio;
