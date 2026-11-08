@@ -54,6 +54,8 @@ public class Comprobante extends javax.swing.JInternalFrame {
 
         jLabel3.setText("jLabel3");
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Comprobante de Viaje");
 
@@ -134,6 +136,7 @@ public class Comprobante extends javax.swing.JInternalFrame {
 
         txtPrecioFinal.setEditable(false);
         txtPrecioFinal.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        txtPrecioFinal.setText("$");
         txtPrecioFinal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);

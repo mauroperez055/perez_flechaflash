@@ -75,7 +75,7 @@ public class EmitirPasaje extends javax.swing.JInternalFrame {
         jTextField2.setText("Vendido");
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel5.setText("Tipo de asiento:");
+        jLabel5.setText("Categoría asiento:");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Precio Final:");

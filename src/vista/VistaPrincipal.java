@@ -48,8 +48,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnConsultarLugares = new javax.swing.JButton();
         btnEmitirPasaje = new javax.swing.JButton();
         btnBuscarPasaje = new javax.swing.JButton();
-        btnListarPasajes = new javax.swing.JButton();
+        btnListarPasajePasajero = new javax.swing.JButton();
         btnInformesCole = new javax.swing.JButton();
+        btnListarPasajeFecha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlechaFlash");
@@ -246,6 +247,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnEmitirPasaje.setContentAreaFilled(false);
         btnEmitirPasaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEmitirPasaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEmitirPasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmitirPasajeActionPerformed(evt);
+            }
+        });
 
         btnBuscarPasaje.setBackground(new java.awt.Color(49, 144, 127));
         btnBuscarPasaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -256,19 +262,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnBuscarPasaje.setContentAreaFilled(false);
         btnBuscarPasaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarPasaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        btnListarPasajes.setBackground(new java.awt.Color(49, 144, 127));
-        btnListarPasajes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnListarPasajes.setForeground(new java.awt.Color(0, 0, 0));
-        btnListarPasajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-ticket.png"))); // NOI18N
-        btnListarPasajes.setText("Listado de pasajes");
-        btnListarPasajes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnListarPasajes.setContentAreaFilled(false);
-        btnListarPasajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnListarPasajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarPasajes.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarPasaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarPasajesActionPerformed(evt);
+                btnBuscarPasajeActionPerformed(evt);
+            }
+        });
+
+        btnListarPasajePasajero.setBackground(new java.awt.Color(49, 144, 127));
+        btnListarPasajePasajero.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnListarPasajePasajero.setForeground(new java.awt.Color(0, 0, 0));
+        btnListarPasajePasajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-ticket.png"))); // NOI18N
+        btnListarPasajePasajero.setText("Listar pasajes por pasajero");
+        btnListarPasajePasajero.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnListarPasajePasajero.setContentAreaFilled(false);
+        btnListarPasajePasajero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListarPasajePasajero.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListarPasajePasajero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPasajePasajeroActionPerformed(evt);
             }
         });
 
@@ -287,52 +298,63 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnListarPasajeFecha.setBackground(new java.awt.Color(49, 144, 127));
+        btnListarPasajeFecha.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnListarPasajeFecha.setForeground(new java.awt.Color(0, 0, 0));
+        btnListarPasajeFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-ticket.png"))); // NOI18N
+        btnListarPasajeFecha.setText("Listar pasajes por fecha");
+        btnListarPasajeFecha.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnListarPasajeFecha.setContentAreaFilled(false);
+        btnListarPasajeFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListarPasajeFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListarPasajeFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPasajeFechaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFormsLayout = new javax.swing.GroupLayout(pnlForms);
         pnlForms.setLayout(pnlFormsLayout);
         pnlFormsLayout.setHorizontalGroup(
             pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFormsLayout.createSequentialGroup()
-                        .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFormsLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlFormsLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnRegistrarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnBuscarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnListarPasajeros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnRegistrarCole, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                                        .addComponent(btnBuscarCole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnListarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFormsLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(20, 20, 20)
                         .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator4)
-                            .addComponent(jSeparator5)
-                            .addComponent(jSeparator3)
-                            .addGroup(pnlFormsLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarPasajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnRegistrarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnListarPasajeros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRegistrarCole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnListarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator4)
+                    .addComponent(jSeparator5)
+                    .addComponent(jSeparator3)
+                    .addGroup(pnlFormsLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnListarPasajePasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnListarPasajeFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlFormsLayout.setVerticalGroup(
@@ -385,8 +407,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarPasaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListarPasajes)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(btnListarPasajePasajero)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnListarPasajeFecha)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,8 +424,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
             .addComponent(pnlForms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
 
         pack();
@@ -517,7 +541,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
     }//GEN-LAST:event_btnConsultarLugaresActionPerformed
 
-    private void btnListarPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajesActionPerformed
+    private void btnListarPasajePasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajePasajeroActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         PasajesPasajero pasajesPasajero = new PasajesPasajero();
@@ -526,7 +550,40 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pasajesPasajero.moveToFront();
         escritorio.revalidate();
         escritorio.repaint();
-    }//GEN-LAST:event_btnListarPasajesActionPerformed
+    }//GEN-LAST:event_btnListarPasajePasajeroActionPerformed
+
+    private void btnEmitirPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirPasajeActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        EmitirPasaje emitirPasaje = new EmitirPasaje();
+        emitirPasaje.setVisible(true);
+        escritorio.add(emitirPasaje);
+        emitirPasaje.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnEmitirPasajeActionPerformed
+
+    private void btnBuscarPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPasajeActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        BuscarPasaje buscarPasaje = new BuscarPasaje();
+        buscarPasaje.setVisible(true);
+        escritorio.add(buscarPasaje);
+        buscarPasaje.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnBuscarPasajeActionPerformed
+
+    private void btnListarPasajeFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajeFechaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        ListadoPasajesFecha pasajeFecha = new ListadoPasajesFecha();
+        pasajeFecha.setVisible(true);
+        escritorio.add(pasajeFecha);
+        pasajeFecha.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnListarPasajeFechaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -558,8 +615,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEmitirPasaje;
     private javax.swing.JButton btnInformesCole;
     private javax.swing.JButton btnListarCole;
+    private javax.swing.JButton btnListarPasajeFecha;
+    private javax.swing.JButton btnListarPasajePasajero;
     private javax.swing.JButton btnListarPasajeros;
-    private javax.swing.JButton btnListarPasajes;
     private javax.swing.JButton btnListarViajes;
     private javax.swing.JButton btnRegistrarCole;
     private javax.swing.JButton btnRegistrarPasajero;
