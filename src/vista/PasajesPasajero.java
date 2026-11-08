@@ -35,7 +35,9 @@ public class PasajesPasajero extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPasajes = new javax.swing.JTable();
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        setClosable(true);
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Listado de Pasajes por Pasajero");
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N

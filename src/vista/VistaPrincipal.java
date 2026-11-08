@@ -226,11 +226,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnConsultarLugares.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         btnConsultarLugares.setForeground(new java.awt.Color(0, 0, 0));
         btnConsultarLugares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
-        btnConsultarLugares.setText("Consultar lugares");
+        btnConsultarLugares.setText("Consultar asientos");
         btnConsultarLugares.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnConsultarLugares.setContentAreaFilled(false);
         btnConsultarLugares.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultarLugares.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnConsultarLugares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarLugaresActionPerformed(evt);
+            }
+        });
 
         btnEmitirPasaje.setBackground(new java.awt.Color(49, 144, 127));
         btnEmitirPasaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -261,6 +266,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnListarPasajes.setContentAreaFilled(false);
         btnListarPasajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnListarPasajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnListarPasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarPasajesActionPerformed(evt);
+            }
+        });
 
         btnInformesCole.setBackground(new java.awt.Color(49, 144, 127));
         btnInformesCole.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -352,9 +362,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnListarCole)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnInformesCole)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrarViaje)
@@ -362,7 +372,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnListarViajes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConsultarLugares)
@@ -376,7 +386,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarPasaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarPasajes)
-                .addGap(22, 22, 22))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,6 +505,28 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.revalidate();
         escritorio.repaint();
     }//GEN-LAST:event_btnInformesColeActionPerformed
+
+    private void btnConsultarLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarLugaresActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        ConsultarAsientos consultarAsientos = new ConsultarAsientos();
+        consultarAsientos.setVisible(true);
+        escritorio.add(consultarAsientos);
+        consultarAsientos.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnConsultarLugaresActionPerformed
+
+    private void btnListarPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajesActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        PasajesPasajero pasajesPasajero = new PasajesPasajero();
+        pasajesPasajero.setVisible(true);
+        escritorio.add(pasajesPasajero);
+        pasajesPasajero.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnListarPasajesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
