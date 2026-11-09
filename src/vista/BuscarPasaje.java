@@ -4,6 +4,10 @@
  */
 package vista;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Mauro Perez
@@ -31,7 +35,13 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
         txtNumPasaje = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         pnlPasajeEncontrado = new javax.swing.JPanel();
-        mostrarComp = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/img/fondo.png"));
+        Image miImagen = icono.getImage();
+        mostrarComp = new javax.swing.JDesktopPane() {
+            public void paintComponent (Graphics g) {
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Buscar Pasaje");
@@ -116,16 +126,15 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
         mostrarComp.removeAll();
         Comprobante comprobante = new Comprobante();
         
-        // Obtenemos las dimensiones del contenedor
+        // Obtengo las dimensiones del contenedor para poder centrar el comprobante
         int ancho = mostrarComp.getWidth() - 40;
         int alto = mostrarComp.getHeight() - 40;
         comprobante.setSize(ancho, alto);
         
-        // Calculamos las coordenadas para centrarla
+        // Calculo las coordenadas para centrarla
         int x = (mostrarComp.getWidth() - comprobante.getWidth()) / 2;
         int y = (mostrarComp.getHeight() - comprobante.getHeight()) / 2;
         
-        // Establecemos la posición
         comprobante.setLocation(x, y);
         mostrarComp.add(comprobante);
         comprobante.setVisible(true);
