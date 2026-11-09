@@ -36,10 +36,10 @@ public class ListadoPasajeros extends javax.swing.JInternalFrame {
         setClosable(true);
         setResizable(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Listado de Pasajeros");
 
-        jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("de un viaje determinado");
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -99,7 +99,7 @@ public class ListadoPasajeros extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtIdViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

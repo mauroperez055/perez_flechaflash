@@ -31,6 +31,7 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
         txtNumPasaje = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         pnlPasajeEncontrado = new javax.swing.JPanel();
+        mostrarComp = new javax.swing.JDesktopPane();
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Buscar Pasaje");
@@ -40,16 +41,32 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
 
         btnBuscar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout mostrarCompLayout = new javax.swing.GroupLayout(mostrarComp);
+        mostrarComp.setLayout(mostrarCompLayout);
+        mostrarCompLayout.setHorizontalGroup(
+            mostrarCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        mostrarCompLayout.setVerticalGroup(
+            mostrarCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pnlPasajeEncontradoLayout = new javax.swing.GroupLayout(pnlPasajeEncontrado);
         pnlPasajeEncontrado.setLayout(pnlPasajeEncontradoLayout);
         pnlPasajeEncontradoLayout.setHorizontalGroup(
             pnlPasajeEncontradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(mostrarComp, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnlPasajeEncontradoLayout.setVerticalGroup(
             pnlPasajeEncontradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addComponent(mostrarComp)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -71,7 +88,9 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar)))
                         .addGap(0, 118, Short.MAX_VALUE))
-                    .addComponent(pnlPasajeEncontrado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlPasajeEncontrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -92,11 +111,36 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        mostrarComp.removeAll();
+        Comprobante comprobante = new Comprobante();
+        
+        // Obtenemos las dimensiones del contenedor
+        int ancho = mostrarComp.getWidth() - 40;
+        int alto = mostrarComp.getHeight() - 40;
+        comprobante.setSize(ancho, alto);
+        
+        // Calculamos las coordenadas para centrarla
+        int x = (mostrarComp.getWidth() - comprobante.getWidth()) / 2;
+        int y = (mostrarComp.getHeight() - comprobante.getHeight()) / 2;
+        
+        // Establecemos la posición
+        comprobante.setLocation(x, y);
+        mostrarComp.add(comprobante);
+        comprobante.setVisible(true);
+        comprobante.moveToFront();
+
+        mostrarComp.revalidate();
+        mostrarComp.repaint();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JDesktopPane mostrarComp;
     private javax.swing.JPanel pnlPasajeEncontrado;
     private javax.swing.JTextField txtNumPasaje;
     // End of variables declaration//GEN-END:variables

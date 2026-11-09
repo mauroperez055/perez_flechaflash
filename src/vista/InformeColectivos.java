@@ -37,7 +37,7 @@ public class InformeColectivos extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Informe de Colectivos por Destino y Fecha");
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N

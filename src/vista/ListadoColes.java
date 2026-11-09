@@ -38,7 +38,7 @@ public class ListadoColes extends javax.swing.JInternalFrame {
         setClosable(true);
         setResizable(true);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Listado de Colectivos ");
 
         tblColectivos.setModel(new javax.swing.table.DefaultTableModel(
@@ -74,7 +74,7 @@ public class ListadoColes extends javax.swing.JInternalFrame {
         jRadioButton3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jRadioButton3.setText("Todos");
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("Ordenados por Hora de Salida");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,7 +112,7 @@ public class ListadoColes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton1)
