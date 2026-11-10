@@ -4,6 +4,7 @@ package vista;
 import com.toedter.calendar.JDateChooser;
 import control.Conexion;
 import control.PasajeroData;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -460,7 +461,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnBuscarPasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPasajeroActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        BuscarPasajero buscarPasajero = new BuscarPasajero();
+        BuscarPasajero buscarPasajero = new BuscarPasajero(pasajeroData);
         buscarPasajero.setVisible(true);
         escritorio.add(buscarPasajero);
         buscarPasajero.moveToFront();
@@ -685,6 +686,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
             if (jPanel.getComponents()[i] instanceof JComboBox) {
                 combo = (JComboBox) jPanel.getComponents()[i];
                 combo.setSelectedIndex(-1);
+            }
+        }
+    }
+    
+    public static void desactivarCampos(JPanel panel) {
+        for (Component comp : panel.getComponents()) {
+            if (comp instanceof JTextField 
+                || comp instanceof JComboBox 
+                || comp instanceof JCheckBox) {
+            comp.setEnabled(false);
             }
         }
     }
