@@ -2,6 +2,7 @@
 package vista;
 
 import control.PasajeroData;
+import javax.swing.JOptionPane;
 import modelo.Pasajero;
 
 public class BuscarPasajero extends javax.swing.JInternalFrame {
@@ -12,11 +13,13 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         initComponents();
         this.pasajeroData = pasajeroData;
         
-        VistaPrincipal.desactivarCampos(pnlDatos);
+        VistaPrincipal.desActivarCampos(pnlDatos, false);
+        chbxEstado.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnAlta.setEnabled(false);
         btnBaja.setEnabled(false);
+        btnActualizar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -64,6 +67,24 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniKeyTyped(evt);
+            }
+        });
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel7.setText("Estado:");
 
@@ -76,11 +97,23 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setText("Nombre/s:");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("Apellido/s:");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Teléfono:");
+
+        txtCodigoArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoAreaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
@@ -149,6 +182,11 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
 
         btnActualizar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -161,6 +199,11 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
 
         btnLimpiar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar Cambios");
@@ -248,10 +291,35 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        if (txtDniBusqueda.getText().equals("")) {
+            return;
+        }
+        
         int dni = Integer.parseInt(txtDniBusqueda.getText());
         
         try {
             Pasajero pasajeroEncontrado = pasajeroData.buscarPasajeroDni(dni);
+            
+            if (pasajeroEncontrado == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró el pasajero.", "Atención", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (pasajeroEncontrado != null) {
+                btnActualizar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnEliminar.setEnabled(true);
+                btnAlta.setEnabled(false);
+                btnBaja.setEnabled(false);
+                VistaPrincipal.desActivarCampos(pnlDatos, false);
+            }
+            
+            if (pasajeroEncontrado.isActivo()) {
+                btnBaja.setEnabled(true);
+            } else {
+                btnAlta.setEnabled(true);
+            }
             
             txtApellido.setText(pasajeroEncontrado.getApellido());
             txtNombre.setText(pasajeroEncontrado.getNombre());
@@ -268,6 +336,53 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        VistaPrincipal.limpiarCampos(pnlDatos);
+        VistaPrincipal.desActivarCampos(pnlDatos, false);
+        chbxEstado.setSelected(false);
+        txtDniBusqueda.setText("");
+        btnActualizar.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnAlta.setEnabled(false);
+        btnBaja.setEnabled(false);
+        
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        VistaPrincipal.desActivarCampos(pnlDatos, true);
+        btnGuardar.setEnabled(true);
+        btnEliminar.setEnabled(false);
+        btnActualizar.setEnabled(false);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarString(evt, txtApellido);
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarString(evt, txtNombre);
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarEnteros(evt, txtDni);
+    }//GEN-LAST:event_txtDniKeyTyped
+
+    private void txtCodigoAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoAreaKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarEnteros(evt, txtCodigoArea);
+    }//GEN-LAST:event_txtCodigoAreaKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarEnteros(evt, txtTelefono);
+    }//GEN-LAST:event_txtTelefonoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

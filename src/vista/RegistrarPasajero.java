@@ -90,6 +90,11 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         });
 
         txtCodigoArea.setToolTipText("codigo de area");
+        txtCodigoArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoAreaKeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 8)); // NOI18N
         jLabel7.setText("Código de área");
@@ -267,6 +272,11 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         VistaPrincipal.validarEnteros(evt, txtTelefono);
     }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtCodigoAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoAreaKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarEnteros(evt, txtCodigoArea);
+    }//GEN-LAST:event_txtCodigoAreaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

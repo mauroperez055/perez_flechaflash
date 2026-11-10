@@ -690,12 +690,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
     
-    public static void desactivarCampos(JPanel panel) {
+    public static void desActivarCampos(JPanel panel, boolean valor) {
         for (Component comp : panel.getComponents()) {
             if (comp instanceof JTextField 
-                || comp instanceof JComboBox 
-                || comp instanceof JCheckBox) {
-            comp.setEnabled(false);
+                || comp instanceof JComboBox)  {
+            comp.setEnabled(valor);
             }
         }
     }
