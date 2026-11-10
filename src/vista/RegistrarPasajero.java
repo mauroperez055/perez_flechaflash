@@ -32,6 +32,8 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtCodigoArea = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnGuardarPasajero = new javax.swing.JButton();
 
         setClosable(true);
@@ -89,6 +91,12 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
 
         txtCodigoArea.setToolTipText("codigo de area");
 
+        jLabel7.setFont(new java.awt.Font("Arial Black", 0, 8)); // NOI18N
+        jLabel7.setText("Código de área");
+
+        jLabel8.setFont(new java.awt.Font("Arial Black", 0, 8)); // NOI18N
+        jLabel8.setText("usuario@dominio.com");
+
         javax.swing.GroupLayout pnlDatosPasajeroLayout = new javax.swing.GroupLayout(pnlDatosPasajero);
         pnlDatosPasajero.setLayout(pnlDatosPasajeroLayout);
         pnlDatosPasajeroLayout.setHorizontalGroup(
@@ -97,47 +105,57 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                 .addGap(122, 122, 122)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8)
+                    .addComponent(txtApellido)
+                    .addComponent(txtCorreo)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosPasajeroLayout.createSequentialGroup()
-                        .addComponent(txtCodigoArea)
-                        .addGap(18, 18, 18)
+                        .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlDatosPasajeroLayout.createSequentialGroup()
+                                .addComponent(txtCodigoArea)
+                                .addGap(18, 18, 18))
+                            .addGroup(pnlDatosPasajeroLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(34, 34, 34)))
                         .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(txtNombre)
-                    .addComponent(txtDNI)
-                    .addComponent(txtCorreo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         pnlDatosPasajeroLayout.setVerticalGroup(
             pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosPasajeroLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosPasajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigoArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btnGuardarPasajero.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -162,9 +180,9 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(245, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardarPasajero)
-                .addGap(242, 242, 242))
+                .addGap(243, 243, 243))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,10 +190,10 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(pnlDatosPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlDatosPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardarPasajero)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -234,6 +252,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
             VistaPrincipal.limpiarCampos(pnlDatosPasajero);
             return;
         } catch (SQLException e) {
+            /*si el dni ya existe*/
             if (e.getErrorCode() == 1062) {
                 JOptionPane.showMessageDialog(this, "Ya existe un pasajero registrado con ese DNI.", "DNI duplicado", JOptionPane.WARNING_MESSAGE);
                 VistaPrincipal.limpiarCampos(pnlDatosPasajero);
@@ -258,6 +277,8 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel pnlDatosPasajero;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCodigoArea;
