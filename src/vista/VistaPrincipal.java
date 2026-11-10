@@ -1,16 +1,29 @@
 
 package vista;
 
+import com.toedter.calendar.JDateChooser;
+import control.Conexion;
+import control.PasajeroData;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 public class VistaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
+    private PasajeroData pasajeroData;
+    private Conexion conexion;
 
     public VistaPrincipal() {
         initComponents();
+        this.conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
+        this.pasajeroData = new PasajeroData(conexion);
+        
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
@@ -436,7 +449,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnRegistrarPasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPasajeroActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        RegistrarPasajero registrarPasajero = new RegistrarPasajero();
+        RegistrarPasajero registrarPasajero = new RegistrarPasajero(pasajeroData);
         registrarPasajero.setVisible(true);
         escritorio.add(registrarPasajero);
         registrarPasajero.moveToFront();
@@ -587,6 +600,95 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
     }//GEN-LAST:event_btnListarPasajeFechaActionPerformed
 
+    
+    /* Métodos auxiliares para control de entradas del usuario, llenar tablas, etc*/
+    public static void validarEnteros(java.awt.event.KeyEvent evt, JTextField jText) {
+        char caracter = evt.getKeyChar();
+
+        if (!Character.isDigit(caracter)) {
+            evt.consume();
+        }
+    }
+    
+    public static void validarString(java.awt.event.KeyEvent evt, JTextField jText) {
+        char caracter = evt.getKeyChar();
+
+        if (!Character.isLetter(caracter) && !Character.isWhitespace(caracter)) {
+            evt.consume();
+        }
+        
+    }
+    
+    public static boolean validarCorreo(JTextField jText) {
+        String correo = jText.getText();
+        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        
+        if (!correo.matches(regex)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean validarCamposVacios(JPanel jPanel) {
+        
+        for (int i = 0; i < jPanel.getComponents().length; i++) {
+            
+            if (jPanel.getComponents()[i] instanceof JTextField) {
+                JTextField caja = (JTextField) jPanel.getComponents()[i];
+                if (caja.getText().trim().isEmpty()) {
+                    return false;
+                }
+                
+            }
+            
+            if (jPanel.getComponents()[i] instanceof JComboBox) {
+                JComboBox combo = (JComboBox) jPanel.getComponents()[i];
+                if (combo.getSelectedItem() == null || !combo.isEnabled() || combo.getSelectedItem().toString().isEmpty()) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+    
+    /* Metodo que formatea los String de nombres y apellidos para que tengan un formato coherente, por ejemplo:
+    *   ingresa: MaurO pErez y se guarda; Mauro Perez
+    */
+    public static String formatearNombresApellidos(String texto) {
+        String[] palabras = texto.trim().toLowerCase().split("\\s+");
+        StringBuilder resultado = new StringBuilder(); // utilizo StringBuilder porque es mas efectivo para modificar cadenas
+        
+        for (String palabra : palabras) {
+            resultado.append(palabra.substring(0,1).toUpperCase())
+                            .append(palabra.substring(1))
+                            .append(" ");
+        }
+        
+        return resultado.toString().trim();
+    }
+    
+    public static void limpiarCampos(JPanel  jPanel) {
+        JComboBox combo = null;
+        for (int i = 0; i < jPanel.getComponents().length; i++) {
+            if (jPanel.getComponents()[i] instanceof JTextField) {
+                JTextField caja = (JTextField) jPanel.getComponents()[i];
+                caja.setText("");
+            }
+            
+            if (jPanel.getComponents()[i] instanceof JSpinner) {
+                JSpinner spinner = (JSpinner) jPanel.getComponents()[i];
+                spinner.setValue(0);
+            }
+            
+            if (jPanel.getComponents()[i] instanceof JComboBox) {
+                combo = (JComboBox) jPanel.getComponents()[i];
+                combo.setSelectedIndex(-1);
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
