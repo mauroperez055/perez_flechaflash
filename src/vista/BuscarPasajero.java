@@ -3,11 +3,13 @@ package vista;
 
 import control.PasajeroData;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 import modelo.Pasajero;
 
 public class BuscarPasajero extends javax.swing.JInternalFrame {
 
     private PasajeroData pasajeroData;
+    private Pasajero pasajeroEncontrado;
     
     public BuscarPasajero(PasajeroData pasajeroData) {
         initComponents();
@@ -190,12 +192,27 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
 
         btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnAlta.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnAlta.setText("Alta ");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnBaja.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnBaja.setText("Baja");
+        btnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -207,6 +224,11 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
 
         btnGuardar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar Cambios");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -298,7 +320,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         int dni = Integer.parseInt(txtDniBusqueda.getText());
         
         try {
-            Pasajero pasajeroEncontrado = pasajeroData.buscarPasajeroDni(dni);
+            pasajeroEncontrado = pasajeroData.buscarPasajeroDni(dni);
             
             if (pasajeroEncontrado == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró el pasajero.", "Atención", JOptionPane.WARNING_MESSAGE);
@@ -332,7 +354,9 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             
             chbxEstado.setSelected(pasajeroEncontrado.isActivo());
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -354,6 +378,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         VistaPrincipal.desActivarCampos(pnlDatos, true);
+        txtDni.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnActualizar.setEnabled(false);
@@ -383,6 +408,101 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         VistaPrincipal.validarEnteros(evt, txtTelefono);
     }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if(!VistaPrincipal.validarCamposVacios(pnlDatos)){
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos.", "Atención!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(!VistaPrincipal.validarCorreo(txtCorreo)) {
+            JOptionPane.showMessageDialog(this, "El correo no tiene el formato correcto.", "Atención", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            String apellido = txtApellido.getText();
+            String nombre = txtNombre.getText();
+            int dni = Integer.parseInt(txtDni.getText());
+            String correo = txtCorreo.getText();
+            String codigoArea = txtCodigoArea.getText();
+            String telefono = txtTelefono.getText();
+            boolean estado = chbxEstado.isSelected();
+            
+            String telefonoCompleto = codigoArea + "-" + telefono;
+            
+            /*formateo el apellido y nombre antes de guardarlo*/
+            String apellidoFormateado = VistaPrincipal.formatearNombresApellidos(apellido);
+            String nombreFormateado = VistaPrincipal.formatearNombresApellidos(nombre);
+            
+            Pasajero pasajeroActualizado = new Pasajero(dni, nombreFormateado, apellidoFormateado, correo, telefonoCompleto, estado);
+            
+            pasajeroData.actualizarPasajero(pasajeroActualizado);
+            
+            JOptionPane.showMessageDialog(this, "Pasajero actualizado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int eleccion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el pasajero?", "Eliminar Pasajero", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+            if (eleccion == 0) {
+                pasajeroData.eliminarPasajero(pasajeroEncontrado);
+                JOptionPane.showMessageDialog(this, "Pasajero eliminado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                VistaPrincipal.limpiarCampos(pnlDatos);
+                chbxEstado.setSelected(false);
+                return;
+            } else if (eleccion == 1) {
+                return;
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
+        // TODO add your handling code here:
+        try {
+            pasajeroData.bajaLogicaPasajero(pasajeroEncontrado);
+            JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            chbxEstado.setSelected(false);
+            return;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnBajaActionPerformed
+
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        // TODO add your handling code here:
+        try {
+            pasajeroData.altaLogicaPasajero(pasajeroEncontrado);
+            JOptionPane.showMessageDialog(this, "Pasajero dado de alta.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            chbxEstado.setSelected(false);
+            return;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo dar de alta el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnAltaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

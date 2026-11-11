@@ -78,16 +78,15 @@ public class PasajeroData {
     }
     
     public void actualizarPasajero(Pasajero pasajero) throws SQLException {
-        String sql ="UPDATE pasajeros SET dni = ?, nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE idPasajero = ?";
+        String sql ="UPDATE pasajeros SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE dni = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, pasajero.getDni());
-            ps.setString(2, pasajero.getNombre());
-            ps.setString(3, pasajero.getApellido());
-            ps.setString(4, pasajero.getCorreo());
-            ps.setString(5, pasajero.getTelefono());
-            ps.setInt(6, pasajero.getIdPasajero());
+            ps.setString(1, pasajero.getNombre());
+            ps.setString(2, pasajero.getApellido());
+            ps.setString(3, pasajero.getCorreo());
+            ps.setString(4, pasajero.getTelefono());
+            ps.setInt(5, pasajero.getDni());
             
             int exito = ps.executeUpdate();
             
