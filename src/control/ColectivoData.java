@@ -79,16 +79,15 @@ public class ColectivoData {
     }
     
     public void actualizarColectivo(Colectivo colectivo) throws SQLException {
-        String sql = "UPDATE colectivos SET matricula = ?, marca = ?, modelo = ?, capacidad = ?, chofer = ? WHERE idColectivo = ?";
+        String sql = "UPDATE colectivos SET marca = ?, modelo = ?, capacidad = ?, chofer = ? WHERE matricula = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, colectivo.getMatricula());
-            ps.setString(2, colectivo.getMarca());
-            ps.setString(3, colectivo.getModelo());
-            ps.setInt(4, colectivo.getCapacidad());
-            ps.setString(5, colectivo.getChofer());
-            ps.setInt(6, colectivo.getIdColectivo());
+            ps.setString(1, colectivo.getMarca());
+            ps.setString(2, colectivo.getModelo());
+            ps.setInt(3, colectivo.getCapacidad());
+            ps.setString(4, colectivo.getChofer());
+            ps.setString(5, colectivo.getMatricula());
             
             int exito = ps.executeUpdate();
             

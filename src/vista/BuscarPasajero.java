@@ -17,11 +17,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         
         VistaPrincipal.desActivarCampos(pnlDatos, false);
         chbxEstado.setEnabled(false);
-        btnGuardar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        btnAlta.setEnabled(false);
-        btnBaja.setEnabled(false);
-        btnActualizar.setEnabled(false);
+        VistaPrincipal.desactivarBotones(pnlButtons);
     }
 
     @SuppressWarnings("unchecked")
@@ -48,12 +44,14 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         chbxEstado = new javax.swing.JCheckBox();
         txtCodigoArea = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnAlta = new javax.swing.JButton();
+        pnlButtons = new javax.swing.JPanel();
         btnBaja = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnAlta = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnLimpiar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -182,43 +180,11 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
-        btnActualizar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        btnAlta.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnAlta.setText("Alta ");
-        btnAlta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAltaActionPerformed(evt);
-            }
-        });
-
         btnBaja.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnBaja.setText("Baja");
         btnBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBajaActionPerformed(evt);
-            }
-        });
-
-        btnLimpiar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
             }
         });
 
@@ -230,28 +196,89 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        btnAlta.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnAlta.setText("Alta ");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlButtonsLayout = new javax.swing.GroupLayout(pnlButtons);
+        pnlButtons.setLayout(pnlButtonsLayout);
+        pnlButtonsLayout.setHorizontalGroup(
+            pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAlta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlButtonsLayout.setVerticalGroup(
+            pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnAlta)
+                    .addComponent(btnBaja)
+                    .addComponent(btnGuardar))
+                .addContainerGap())
+        );
+
+        btnLimpiar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLimpiar)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLimpiar)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDniBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)
-                        .addGap(64, 64, 64)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,47 +287,50 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(btnActualizar)
+                        .addComponent(pnlButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBaja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator1)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtDniBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar)
+                .addGap(93, 93, 93))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtDniBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnAlta)
-                    .addComponent(btnBaja)
-                    .addComponent(btnLimpiar)
-                    .addComponent(btnGuardar))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,13 +354,15 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             
             if (pasajeroEncontrado == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró el pasajero.", "Atención", JOptionPane.WARNING_MESSAGE);
+                VistaPrincipal.limpiarCampos(pnlDatos);
+                VistaPrincipal.desactivarBotones(pnlButtons);
                 return;
             }
             
             if (pasajeroEncontrado != null) {
                 btnActualizar.setEnabled(true);
                 btnGuardar.setEnabled(false);
-                btnEliminar.setEnabled(false);
+//                btnEliminar.setEnabled(false);
                 btnEliminar.setEnabled(true);
                 btnAlta.setEnabled(false);
                 btnBaja.setEnabled(false);
@@ -367,12 +399,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         VistaPrincipal.desActivarCampos(pnlDatos, false);
         chbxEstado.setSelected(false);
         txtDniBusqueda.setText("");
-        btnActualizar.setEnabled(false);
-        btnGuardar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        btnAlta.setEnabled(false);
-        btnBaja.setEnabled(false);
-        
+        VistaPrincipal.desactivarBotones(pnlButtons);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -443,6 +470,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Pasajero actualizado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             
             VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desactivarBotones(pnlButtons);
             return;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error al actualizar el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
@@ -459,6 +487,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
                 pasajeroData.eliminarPasajero(pasajeroEncontrado);
                 JOptionPane.showMessageDialog(this, "Pasajero eliminado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 VistaPrincipal.limpiarCampos(pnlDatos);
+                VistaPrincipal.desactivarBotones(pnlButtons);
                 chbxEstado.setSelected(false);
                 return;
             } else if (eleccion == 1) {
@@ -478,6 +507,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             pasajeroData.bajaLogicaPasajero(pasajeroEncontrado);
             JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desactivarBotones(pnlButtons);
             chbxEstado.setSelected(false);
             return;
             
@@ -494,6 +524,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             pasajeroData.altaLogicaPasajero(pasajeroEncontrado);
             JOptionPane.showMessageDialog(this, "Pasajero dado de alta.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desactivarBotones(pnlButtons);
             chbxEstado.setSelected(false);
             return;
             
@@ -522,8 +553,10 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCodigoArea;

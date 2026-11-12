@@ -260,7 +260,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
             /*si el dni ya existe*/
             if (e.getErrorCode() == 1062) {
                 JOptionPane.showMessageDialog(this, "Ya existe un pasajero registrado con ese DNI.", "DNI duplicado", JOptionPane.WARNING_MESSAGE);
-                VistaPrincipal.limpiarCampos(pnlDatosPasajero);
+                return;
             } else {
                 JOptionPane.showMessageDialog(this, "Error al guardar el pasajero.", "Atención", JOptionPane.ERROR_MESSAGE);
                 VistaPrincipal.limpiarCampos(pnlDatosPasajero);

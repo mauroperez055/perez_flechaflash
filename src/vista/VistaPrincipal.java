@@ -1,29 +1,31 @@
 
 package vista;
 
-import com.toedter.calendar.JDateChooser;
+import control.ColectivoData;
 import control.Conexion;
 import control.PasajeroData;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class VistaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
     private PasajeroData pasajeroData;
+    private ColectivoData colectivoData;
     private Conexion conexion;
 
     public VistaPrincipal() {
         initComponents();
         this.conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
         this.pasajeroData = new PasajeroData(conexion);
+        this.colectivoData = new ColectivoData(conexion);
         
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
@@ -483,7 +485,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnRegistrarColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarColeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        RegistrarCole registrarCole = new RegistrarCole();
+        RegistrarCole registrarCole = new RegistrarCole(colectivoData);
         registrarCole.setVisible(true);
         escritorio.add(registrarCole);
         registrarCole.moveToFront();
@@ -494,7 +496,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnBuscarColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarColeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        BuscarCole buscarCole = new BuscarCole();
+        BuscarCole buscarCole = new BuscarCole(colectivoData);
         buscarCole.setVisible(true);
         escritorio.add(buscarCole);
         buscarCole.moveToFront();
@@ -631,6 +633,29 @@ public class VistaPrincipal extends javax.swing.JFrame {
         return true;
     }
     
+    
+    
+    /* valida que la matricula tenga dos formas posibles, por ejemplo:
+    *   1: ABC123 (matriculas viejas)
+    *   2: AB123CD (matriculas mercosur nuevas)
+    */
+    public static boolean validarMatricula(JTextField jText) {
+        String texto = jText.getText();
+        String regex = "^[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}$"; 
+        
+        if (!texto.matches(regex)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static void desactivarBotones(JPanel jPanel) {
+        for (int i = 0; i < jPanel.getComponents().length; i++) {
+            jPanel.getComponents()[i].setEnabled(false);
+        }
+    }
+    
     public static boolean validarCamposVacios(JPanel jPanel) {
         
         for (int i = 0; i < jPanel.getComponents().length; i++) {
@@ -696,6 +721,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 || comp instanceof JComboBox)  {
             comp.setEnabled(valor);
             }
+        }
+    }
+    
+    public static void borraFilasTabla(DefaultTableModel modelo) {
+        int filas = modelo.getRowCount() -1;
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
         }
     }
     
