@@ -56,8 +56,10 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("Correo:");
 
+        txtCorreo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtCorreo.setToolTipText("ingrese el correo del pasajero");
 
+        txtApellido.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtApellido.setToolTipText("ingrese apellido del pasajero");
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -65,6 +67,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
+        txtDNI.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtDNI.setToolTipText("ingrese el dni del pasajero");
         txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -72,6 +75,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNombre.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtNombre.setToolTipText("ingrese nombre del pasajero");
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -82,6 +86,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Teléfono:");
 
+        txtTelefono.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtTelefono.setToolTipText("ingrese el telefono del pasajero");
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -89,6 +94,7 @@ public class RegistrarPasajero extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCodigoArea.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtCodigoArea.setToolTipText("codigo de area");
         txtCodigoArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

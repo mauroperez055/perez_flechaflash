@@ -56,12 +56,20 @@ public class RegistrarCole extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Chofer:");
 
+        txtMatricula.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtMarca.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtModelo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtCapacidad.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCapacidadKeyTyped(evt);
             }
         });
 
+        txtChofer.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtChofer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtChoferKeyTyped(evt);

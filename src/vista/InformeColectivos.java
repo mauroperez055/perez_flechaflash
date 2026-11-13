@@ -43,12 +43,15 @@ public class InformeColectivos extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("DESTINO:");
 
+        cboDestinos.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("FECHA:");
 
         lblCantidadColes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblCantidadColes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        tblInformColes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
         tblInformColes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

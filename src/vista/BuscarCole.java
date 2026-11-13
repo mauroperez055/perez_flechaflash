@@ -62,6 +62,8 @@ public class BuscarCole extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("Ingrese la Matrícula:");
 
+        txtMatriculaBuscar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("Matrícula:");
 
@@ -77,11 +79,20 @@ public class BuscarCole extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel7.setText("Chofer:");
 
+        txtMatricula.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtMarca.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtModelo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtCapacidad.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCapacidadKeyTyped(evt);
             }
         });
+
+        txtChofer.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel8.setText("Estado:");

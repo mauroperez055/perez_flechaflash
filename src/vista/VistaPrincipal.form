@@ -83,13 +83,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
                       <Component id="jSeparator1" max="32767" attributes="0"/>
                       <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
                       <Component id="jSeparator5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
                       <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -103,7 +103,6 @@
                                       <Component id="jLabel16" min="-2" pref="121" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jLabel10" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                           <Component id="btnRegistrarPasajero" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btnBuscarPasajero" alignment="0" max="32767" attributes="0"/>
@@ -114,13 +113,15 @@
                                       </Group>
                                       <Component id="btnListarViajes" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnRegistrarViaje" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                                      <Component id="btnConsultarLugares" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnInformesCole" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
+                                      <Component id="btnColesViajes" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel6" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                                      <Component id="btnConsultarLugares" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="jLabel24" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                       <Component id="btnEmitirPasaje" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                                       <Component id="btnBuscarPasaje" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
@@ -171,7 +172,9 @@
                   <Component id="btnRegistrarViaje" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnListarViajes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnColesViajes" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -707,6 +710,36 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarPasajeFechaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnColesViajes">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7f" green="90" red="31" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial Rounded MT Bold" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/list.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ver colectivos de los viajes"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder/>
+              </Border>
+            </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnColesViajesActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

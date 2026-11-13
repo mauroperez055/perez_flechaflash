@@ -61,24 +61,28 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("Ingrese el DNI:");
 
+        txtDniBusqueda.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtDniBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDniBusquedaKeyTyped(evt);
             }
         });
 
+        txtDni.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDniKeyTyped(evt);
             }
         });
 
+        txtTelefono.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoKeyTyped(evt);
             }
         });
 
+        txtApellido.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApellidoKeyTyped(evt);
@@ -97,11 +101,14 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setText("Nombre/s:");
 
+        txtNombre.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
             }
         });
+
+        txtCorreo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("Apellido/s:");
@@ -109,6 +116,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Teléfono:");
 
+        txtCodigoArea.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtCodigoArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoAreaKeyTyped(evt);

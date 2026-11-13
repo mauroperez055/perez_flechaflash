@@ -3,22 +3,37 @@ package vista;
 
 import control.ColectivoData;
 import control.Conexion;
+import control.LugarData;
 import control.PasajeroData;
+import control.ViajeData;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.Colectivo;
+import modelo.Lugar;
+import modelo.Viaje;
 
 public class VistaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
     private PasajeroData pasajeroData;
     private ColectivoData colectivoData;
+    private LugarData lugarData;
+    private ViajeData viajeData;
     private Conexion conexion;
 
     public VistaPrincipal() {
@@ -26,6 +41,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.conexion = new Conexion("jdbc:mariadb://localhost/perezmauro_flechaflash", "root", "");
         this.pasajeroData = new PasajeroData(conexion);
         this.colectivoData = new ColectivoData(conexion);
+        this.lugarData = new LugarData(conexion);
+        this.viajeData = new ViajeData(conexion);
         
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
@@ -67,6 +84,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnListarPasajePasajero = new javax.swing.JButton();
         btnInformesCole = new javax.swing.JButton();
         btnListarPasajeFecha = new javax.swing.JButton();
+        btnColesViajes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlechaFlash");
@@ -329,6 +347,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnColesViajes.setBackground(new java.awt.Color(49, 144, 127));
+        btnColesViajes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnColesViajes.setForeground(new java.awt.Color(0, 0, 0));
+        btnColesViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
+        btnColesViajes.setText("Ver colectivos de los viajes");
+        btnColesViajes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnColesViajes.setContentAreaFilled(false);
+        btnColesViajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnColesViajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnColesViajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnColesViajesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFormsLayout = new javax.swing.GroupLayout(pnlForms);
         pnlForms.setLayout(pnlFormsLayout);
         pnlFormsLayout.setHorizontalGroup(
@@ -336,10 +369,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlFormsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator4)
                     .addComponent(jSeparator5)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator3)
                     .addGroup(pnlFormsLayout.createSequentialGroup()
                         .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +385,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnRegistrarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnBuscarPasajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -362,11 +394,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                         .addComponent(btnListarCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnColesViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlFormsLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,7 +444,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnRegistrarViaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarViajes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnColesViajes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -507,7 +543,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnListarColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarColeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        ListadoColes listarColes = new ListadoColes();
+        ListadoColes listarColes = new ListadoColes(colectivoData);
         listarColes.setVisible(true);
         escritorio.add(listarColes);
         listarColes.moveToFront();
@@ -518,12 +554,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnRegistrarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarViajeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        RegistrarViaje registrarViaje = new RegistrarViaje();
-        registrarViaje.setVisible(true);
-        escritorio.add(registrarViaje);
-        registrarViaje.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        RegistrarViajeNueva registrarViajeNueva;
+        try {
+            registrarViajeNueva = new RegistrarViajeNueva(colectivoData, lugarData, viajeData);
+            registrarViajeNueva.setVisible(true);
+            escritorio.add(registrarViajeNueva);
+            registrarViajeNueva.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnRegistrarViajeActionPerformed
 
     private void btnListarViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarViajesActionPerformed
@@ -602,6 +644,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.revalidate();
         escritorio.repaint();
     }//GEN-LAST:event_btnListarPasajeFechaActionPerformed
+
+    private void btnColesViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColesViajesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnColesViajesActionPerformed
 
     
     /* Métodos auxiliares para control de entradas del usuario, llenar tablas, etc*/
@@ -731,6 +777,114 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
     
+    public static void cargarTablaColectivos(ArrayList<Colectivo> colectivos, JTable jTable) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        borraFilasTabla(modelo);
+        for (Colectivo cole : colectivos) {
+            modelo.addRow(new Object[] {
+                cole.getIdColectivo(),
+                cole.getMatricula(),
+                cole.getMarca(),
+                cole.getModelo(),
+                cole.getCapacidad(),
+                cole.getChofer(),
+                cole.isActivo()
+            });
+        }
+        
+    }
+    
+    /* metodo que sirve para redonder la hora que aparece en los combox */
+    public static LocalTime redondearHora(LocalTime hora) {
+        int minutos = hora.getMinute();
+        
+        if (minutos == 0 || minutos == 30) {
+            return hora.withSecond(0).withNano(0);
+        }
+        
+        if (minutos < 30) {
+            return hora.withMinute(30).withSecond(0).withNano(0);
+        }
+        
+        return hora.plusHours(1).withMinute(0).withSecond(0).withNano(0);
+    }
+    
+    public static void cargarCboxHorariosSalida(JComboBox combo) {
+        LocalTime hora = LocalTime.now();
+        
+        hora = redondearHora(hora);
+        
+        for (int i = 0; i < 96 ; i++) {
+            combo.addItem(hora.toString());
+            hora = hora.plusMinutes(15);
+        }
+    }
+    
+    public static String calcularHoraLlegada(int duracion, String horaSalida) {
+        LocalTime horaSalidaParse = LocalTime.parse(horaSalida);
+        LocalTime horaLlegada = horaSalidaParse.plusMinutes(duracion);
+        
+        String horaLlegadaString = horaLlegada.toString();
+        
+        return horaLlegadaString;
+    }
+    
+    public static void cargarCboxHorariosLlegada(Date fechaSalidaDate, LocalTime horaSalida, Date fechaLlegadaDate, JComboBox comboLlegada) {
+        comboLlegada.removeAllItems();
+        comboLlegada.setSelectedIndex(-1);
+        
+        if (fechaSalidaDate == null || fechaLlegadaDate == null) {
+            return;
+        }
+        
+        LocalDate fechaSalida = fechaSalidaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaLlegada = fechaLlegadaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        LocalTime horaLlegada = horaSalida.plusMinutes(30);
+        
+        /* si las fechas son iguales, filtro los horarios*/
+        if (fechaLlegada.isEqual(fechaSalida)) {
+            for (int i = 0; i < 24; i++) {
+
+                if (horaLlegada.isAfter(horaSalida)) {
+                    comboLlegada.addItem(horaLlegada.toString());
+                }
+                horaLlegada = horaLlegada.plusMinutes(30);
+            }
+        } else if (fechaLlegada.isAfter(fechaSalida)) {
+            for (int i = 0; i < 48; i++) {
+                horaLlegada = horaLlegada.plusMinutes(30);
+                
+                comboLlegada.addItem(horaLlegada);
+            }
+        }
+    }
+    
+    // si no lo uso borrar
+    public static boolean validarHoraFechaViajes(LocalDate fechaSalida, LocalDate fechaLlegada, LocalTime horaSalida, LocalTime horaLlegada) {
+        LocalDateTime salida = LocalDateTime.of(fechaSalida, horaSalida);
+        LocalDateTime llegada = LocalDateTime.of(fechaLlegada, horaLlegada);
+        
+        if (!llegada.isAfter(salida)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static ArrayList<Lugar> crearLugares(int cantidad, Viaje viaje) throws SQLException {
+        int numeroAsiento = 0;
+        ArrayList<Lugar> lugaresCreados = new ArrayList<>();
+        
+        for (int i = 0; i < cantidad; i++) {
+            numeroAsiento = cantidad + 1;
+            Lugar lugarNuevo = new Lugar(viaje, numeroAsiento, true);
+            lugaresCreados.add(lugarNuevo);
+        }
+        
+        return lugaresCreados;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -757,6 +911,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarCole;
     private javax.swing.JButton btnBuscarPasaje;
     private javax.swing.JButton btnBuscarPasajero;
+    private javax.swing.JButton btnColesViajes;
     private javax.swing.JButton btnConsultarLugares;
     private javax.swing.JButton btnEmitirPasaje;
     private javax.swing.JButton btnInformesCole;

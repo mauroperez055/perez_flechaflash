@@ -127,13 +127,13 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="spnCantidadLugares" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPrevioBase" pref="281" max="32767" attributes="0"/>
+                              <Component id="txtPrecioBase" pref="281" max="32767" attributes="0"/>
                               <Component id="cboColectivos" max="32767" attributes="0"/>
+                              <Component id="txtLugares" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="154" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -177,13 +177,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="spnCantidadLugares" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtLugares" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="txtPrevioBase" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPrecioBase" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -248,8 +248,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDestino">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDestinoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="datechSalida">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="datechSalidaPropertyChange"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboHoraSalida">
           <Properties>
@@ -257,11 +263,17 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboHoraSalidaItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="datechLlegada">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="datechLlegadaPropertyChange"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboHoraLlegada">
           <Properties>
@@ -283,9 +295,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPrevioBase">
+        <Component class="javax.swing.JTextField" name="txtPrecioBase">
         </Component>
         <Component class="javax.swing.JTextField" name="txtOrigen">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtOrigenKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -295,8 +310,6 @@
             <Property name="text" type="java.lang.String" value="Origen:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="spnCantidadLugares">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -304,6 +317,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cantidad lugares:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtLugares">
         </Component>
       </SubComponents>
     </Container>
