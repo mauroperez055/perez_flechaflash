@@ -810,9 +810,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
     
     public static void cargarCboxHorariosSalida(JComboBox combo) {
-        LocalTime hora = LocalTime.now();
+        LocalTime hora = LocalTime.of(00, 00);
         
-        hora = redondearHora(hora);
+//        hora = redondearHora(hora);
         
         for (int i = 0; i < 96 ; i++) {
             combo.addItem(hora.toString());
@@ -827,37 +827,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         String horaLlegadaString = horaLlegada.toString();
         
         return horaLlegadaString;
-    }
-    
-    public static void cargarCboxHorariosLlegada(Date fechaSalidaDate, LocalTime horaSalida, Date fechaLlegadaDate, JComboBox comboLlegada) {
-        comboLlegada.removeAllItems();
-        comboLlegada.setSelectedIndex(-1);
-        
-        if (fechaSalidaDate == null || fechaLlegadaDate == null) {
-            return;
-        }
-        
-        LocalDate fechaSalida = fechaSalidaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate fechaLlegada = fechaLlegadaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        LocalTime horaLlegada = horaSalida.plusMinutes(30);
-        
-        /* si las fechas son iguales, filtro los horarios*/
-        if (fechaLlegada.isEqual(fechaSalida)) {
-            for (int i = 0; i < 24; i++) {
-
-                if (horaLlegada.isAfter(horaSalida)) {
-                    comboLlegada.addItem(horaLlegada.toString());
-                }
-                horaLlegada = horaLlegada.plusMinutes(30);
-            }
-        } else if (fechaLlegada.isAfter(fechaSalida)) {
-            for (int i = 0; i < 48; i++) {
-                horaLlegada = horaLlegada.plusMinutes(30);
-                
-                comboLlegada.addItem(horaLlegada);
-            }
-        }
     }
     
     // si no lo uso borrar
@@ -877,7 +846,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         ArrayList<Lugar> lugaresCreados = new ArrayList<>();
         
         for (int i = 0; i < cantidad; i++) {
-            numeroAsiento = cantidad + 1;
+            numeroAsiento = i + 1;
             Lugar lugarNuevo = new Lugar(viaje, numeroAsiento, true);
             lugaresCreados.add(lugarNuevo);
         }

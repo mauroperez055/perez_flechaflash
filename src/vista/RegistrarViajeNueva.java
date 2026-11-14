@@ -5,7 +5,9 @@ import control.ColectivoData;
 import control.LugarData;
 import control.ViajeData;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Colectivo;
@@ -299,12 +301,15 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
 
         try {
             String origen = txtOrigen.getText();
+            origen = VistaPrincipal.formatearNombresApellidos(origen);
             String destino = txtDestino.getText();
-            int duracion = Integer.parseInt(txtDuracion.getText());
-            
+            destino = VistaPrincipal.formatearNombresApellidos(destino);
+            LocalTime horaSalida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
+            LocalTime horaLlegada = LocalTime.parse(txtHoraLlegada.getText());
             double precio = Double.parseDouble(txtPrecioBase.getText());
             
-            Viaje viajeNuevo = new Viaje(origen, destino, duracion, null, null, null, null, colectivoSeleccionado, precio, true);
+            Viaje viajeNuevo = new Viaje(origen, destino, Time.valueOf(horaSalida), Time.valueOf(horaLlegada), colectivoSeleccionado, precio, true);
+            
             viajeData.cargarViaje(viajeNuevo);
             
             /* con este dato creo los lugares que corresponden*/
@@ -315,7 +320,7 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
                 lugarData.crearLugar(lugar);
             }
             
-            
+            lugares = 0;
             
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) { // si ya existe la matricula

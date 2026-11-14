@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Time;
-import java.sql.Date;
-import java.time.LocalDate;
 import modelo.Colectivo;
 import modelo.Viaje;
 
@@ -21,21 +19,18 @@ public class ViajeData {
     }
     
     public void cargarViaje(Viaje viaje) throws SQLException {
-        String sql = "INSERT INTO viajes (origen, destino, duracionViaje, fechaSalida, fechaLlegada, horaSalida, horaLlegada, idColectivo, precio, estado)"
-                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO viajes (origen, destino, horaSalida, horaLlegada, idColectivo, precio, estado)"
+                         + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, viaje.getOrigen());
             ps.setString(2, viaje.getDestino());
-            ps.setInt(3, viaje.getDuracionViaje());
-            ps.setDate(4, Date.valueOf(viaje.getFechaSalida()));
-            ps.setDate(5, Date.valueOf(viaje.getFechaLlegada()));
-            ps.setTime(6, viaje.getHoraSalida());
-            ps.setTime(7, viaje.getHoraLlegada());
-            ps.setInt(8, viaje.getColectivo().getIdColectivo());
-            ps.setDouble(9, viaje.getPrecio());
-            ps.setBoolean(10, viaje.isActivo());
+            ps.setTime(3, viaje.getHoraSalida());
+            ps.setTime(4, viaje.getHoraLlegada());
+            ps.setInt(5, viaje.getColectivo().getIdColectivo());
+            ps.setDouble(6, viaje.getPrecio());
+            ps.setBoolean(7, viaje.isActivo());
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -55,7 +50,7 @@ public class ViajeData {
     }
 
     public Viaje buscarViaje(int idViaje) throws SQLException {
-        String sql = "SELECT v.idViaje, v.origen, v.destino, v.duracionVIaje, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
+        String sql = "SELECT v.idViaje, v.origen, v.destino, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
@@ -71,9 +66,6 @@ public class ViajeData {
                 int idV = rs.getInt("idVIaje");
                 String origen = rs.getString("origen");
                 String destino = rs.getString("destino");
-                int duracionViaje = rs.getInt("duracionViaje");
-                LocalDate fechaSalida = rs.getDate("fechaSalida").toLocalDate();
-                LocalDate fechaLlegada = rs.getDate("fechaLlegada").toLocalDate();
                 Time horaSalida = rs.getTime("horaSalida");
                 Time horaLlegada = rs.getTime("horaLlegada");
                 double precio = rs.getDouble("precio");
@@ -89,7 +81,7 @@ public class ViajeData {
                 
                 Colectivo colectivo = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
                 
-                Viaje viajeEncontrado = new Viaje(idV, origen, destino, duracionViaje, fechaSalida, fechaLlegada, horaSalida, horaLlegada, colectivo, precio, estado);
+                Viaje viajeEncontrado = new Viaje(idV, origen, destino, horaSalida, horaLlegada, colectivo, precio, estado);
                 return viajeEncontrado;
             }
             
@@ -103,19 +95,16 @@ public class ViajeData {
     }
     
     public void actualizarViaje(Viaje viaje) throws SQLException {
-        String sql = "UPDATE viajes SET origen = ?, destino = ?, duracionViaje = ?, fechaSalida = ?, fechaLlegada = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ? WHERE idViaje = ?";
+        String sql = "UPDATE viajes SET origen = ?, destino = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ? WHERE idViaje = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, viaje.getOrigen());
             ps.setString(2, viaje.getDestino());
-            ps.setInt(3, viaje.getDuracionViaje());
-            ps.setDate(4, Date.valueOf(viaje.getFechaSalida()));
-            ps.setDate(5, Date.valueOf(viaje.getFechaLlegada()));
-            ps.setTime(6, viaje.getHoraSalida());
-            ps.setTime(7, viaje.getHoraLlegada());
-            ps.setInt(8, viaje.getColectivo().getIdColectivo());
-            ps.setInt(9, viaje.getIdViaje());
+            ps.setTime(5, viaje.getHoraSalida());
+            ps.setTime(6, viaje.getHoraLlegada());
+            ps.setInt(7, viaje.getColectivo().getIdColectivo());
+            ps.setInt(8, viaje.getIdViaje());
             
             int exito = ps.executeUpdate();
             
@@ -207,7 +196,7 @@ public class ViajeData {
     */
     private ArrayList<Viaje> listarViajesPorCriterio(String criterio, String valor) throws SQLException {
         ArrayList<Viaje> viajesCriterio = new ArrayList<>();
-        String sql = "SELECT v.idViaje, v.origen, v.destino, v.duracionViaje, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
+        String sql = "SELECT v.idViaje, v.origen, v.destino, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
@@ -224,9 +213,6 @@ public class ViajeData {
                 int idViaje = rs.getInt("idVIaje");
                 String origenViaje = rs.getString("origen");
                 String destinoViaje = rs.getString("destino");
-                int duracionViaje = rs.getInt("duracionViaje");
-                LocalDate fechaSalida  = rs.getDate("fechaSalida").toLocalDate();
-                LocalDate fechaLlegada = rs.getDate("fechaLlegada").toLocalDate();
                 Time horaSalida = rs.getTime("horaSalida");
                 Time horaLlegada = rs.getTime("horaLlegada");
                 double precio = rs.getDouble("precio");
@@ -241,7 +227,7 @@ public class ViajeData {
                 boolean estadoCole = rs.getBoolean("estadoCole");
                 
                 Colectivo cole = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
-                Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, duracionViaje, fechaSalida, fechaLlegada, horaSalida, horaLlegada, cole, precio, estado);
+                Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, horaSalida, horaLlegada, cole, precio, estado);
                 
                 viajesCriterio.add(viaje);
             }
@@ -256,7 +242,7 @@ public class ViajeData {
     /* Todos los viajes activos */
     public ArrayList<Viaje> listarViajesActivos() throws SQLException {
         ArrayList<Viaje> viajesActivos = new ArrayList<>();
-        String sql = "SELECT v.idViaje, v.origen, v.destino, v.duracionViaje, v.fechaSalida, v.fechaLlegada, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
+        String sql = "SELECT v.idViaje, v.origen, v.destino, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
@@ -271,9 +257,6 @@ public class ViajeData {
                 int idViaje = rs.getInt("idVIaje");
                 String origenViaje = rs.getString("origen");
                 String destinoViaje = rs.getString("destino");
-                int duracionViaje = rs.getInt("duracionViaje");
-                LocalDate fechaSalida = rs.getDate("fechaSalida").toLocalDate();
-                LocalDate fechaLlegada = rs.getDate("fechaLlegada").toLocalDate();
                 Time horaSalida = rs.getTime("horaSalida");
                 Time horaLlegada = rs.getTime("horaLlegada");
                 double precio = rs.getDouble("precio");
@@ -288,7 +271,7 @@ public class ViajeData {
                 boolean estadoCole = rs.getBoolean("estadoCole");
                 
                 Colectivo cole = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
-                Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, duracionViaje, fechaSalida, fechaLlegada, horaSalida, horaLlegada, cole, precio, estado);
+                Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, horaSalida, horaLlegada, cole, precio, estado);
                 
                 viajesActivos.add(viaje);
             }
@@ -303,7 +286,7 @@ public class ViajeData {
     /* 3. Ver colectivos y choferes asignados a un Viaje determinado (origen, destino), ordenados por hora de salida */
     public ArrayList<Viaje> viajeInfoColectivo(Viaje viaje) throws SQLException {
         ArrayList<Viaje> viajeInfoColectivo = new ArrayList<>();
-        String sql = "SELECT v.origen, v.destino, v.duracionViaje, v.fechaSalida, v.horaSalida, v.fechaLlegada, v.horaLlegada, c.idColectivo, c.chofer "
+        String sql = "SELECT v.origen, v.destino, v.horaSalida, v.horaLlegada, c.idColectivo, c.chofer "
                          + "FROM viajes v "
                          + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
                          + "WHERE v.origen LIKE ? "
@@ -325,10 +308,7 @@ public class ViajeData {
                 
                 viajeDelCole.setOrigen(rs.getString("origen"));
                 viajeDelCole.setDestino(rs.getString("destino"));
-                viajeDelCole.setDuracionViaje(rs.getInt("duracionViaje"));
                 viajeDelCole.setHoraSalida(rs.getTime("horaSalida"));
-                viajeDelCole.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());
-                viajeDelCole.setFechaLlegada(rs.getDate("fechaLlegada").toLocalDate());
                 viajeDelCole.setHoraLlegada(rs.getTime("horaLlegada"));
                 viajeDelCole.setColectivo(cole);
                 

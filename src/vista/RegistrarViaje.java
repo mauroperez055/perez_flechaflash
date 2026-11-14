@@ -256,9 +256,7 @@ public class RegistrarViaje extends javax.swing.JInternalFrame {
         String horaSeleccionada = (String) cboHoraSalida.getSelectedItem();
         horaSalida = LocalTime.parse(horaSeleccionada);
         
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            VistaPrincipal.cargarCboxHorariosLlegada(fechaSalidaDate, horaSalida, fechaLlegadaDate, cboHoraLlegada);
-        }
+        
     }//GEN-LAST:event_cboHoraSalidaItemStateChanged
 
     private void datechSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datechSalidaPropertyChange
@@ -271,10 +269,7 @@ public class RegistrarViaje extends javax.swing.JInternalFrame {
         String horaSeleccionada = (String) cboHoraSalida.getSelectedItem();
         horaSalida = LocalTime.parse(horaSeleccionada);
         
-        // si la propiedad que cambio es "date" ejecuta el metodo para cargar los horarios
-        if ("date".equals(evt.getPropertyName())) {
-            VistaPrincipal.cargarCboxHorariosLlegada(fechaSalidaDate, horaSalida, fechaLlegadaDate, cboHoraLlegada);
-        }
+       
     }//GEN-LAST:event_datechSalidaPropertyChange
 
     private void datechLlegadaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datechLlegadaPropertyChange
@@ -284,9 +279,7 @@ public class RegistrarViaje extends javax.swing.JInternalFrame {
         String horaSeleccionada = (String) cboHoraSalida.getSelectedItem();
         horaSalida = LocalTime.parse(horaSeleccionada);
         
-        if ("date".equals(evt.getPropertyName())) {
-            VistaPrincipal.cargarCboxHorariosLlegada(fechaSalidaDate, horaSalida, fechaLlegadaDate, cboHoraLlegada);
-        }
+      
     }//GEN-LAST:event_datechLlegadaPropertyChange
 
 

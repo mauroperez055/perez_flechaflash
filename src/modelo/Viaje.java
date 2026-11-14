@@ -3,14 +3,12 @@ package modelo;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Viaje {
     private int idViaje;
     private String origen;
     private String destino;
-    private int duracionViaje;
-    private LocalDate fechaSalida;
-    private LocalDate fechaLlegada;
     private Time horaSalida;
     private Time horaLlegada;
     private Colectivo colectivo;
@@ -20,13 +18,10 @@ public class Viaje {
     public Viaje() {
     }
 
-    public Viaje(int idViaje, String origen, String destino, int duracionViaje, LocalDate fechaSalida, LocalDate fechaLlegada, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+    public Viaje(int idViaje, String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
         this.idViaje = idViaje;
         this.origen = origen;
         this.destino = destino;
-        this.duracionViaje = duracionViaje;
-        this.fechaSalida = fechaSalida;
-        this.fechaLlegada = fechaLlegada;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
         this.colectivo = colectivo;
@@ -34,12 +29,9 @@ public class Viaje {
         this.activo = activo;
     }
 
-    public Viaje(String origen, String destino, int duracionViaje, LocalDate fechaSalida, LocalDate fechaLlegada, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+    public Viaje(String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
         this.origen = origen;
         this.destino = destino;
-        this.duracionViaje = duracionViaje;
-        this.fechaSalida = fechaSalida;
-        this.fechaLlegada = fechaLlegada;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
         this.colectivo = colectivo;
@@ -69,30 +61,6 @@ public class Viaje {
 
     public void setDestino(String destino) {
         this.destino = destino;
-    }
-
-    public int getDuracionViaje() {
-        return duracionViaje;
-    }
-
-    public void setDuracionViaje(int duracionViaje) {
-        this.duracionViaje = duracionViaje;
-    }
-
-    public LocalDate getFechaSalida() {
-        return fechaSalida;
-    }
-
-    public void setFechaSalida(LocalDate fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-
-    public LocalDate getFechaLlegada() {
-        return fechaLlegada;
-    }
-
-    public void setFechaLlegada(LocalDate fechaLlegada) {
-        this.fechaLlegada = fechaLlegada;
     }
 
     public Time getHoraSalida() {
@@ -135,6 +103,7 @@ public class Viaje {
         this.activo = activo;
     }
 
+    
 
     @Override
     public String toString() {
@@ -142,8 +111,6 @@ public class Viaje {
                    "\nidViaje: " + idViaje + ", "
                 + "\norigen: " + origen + ", "
                 + "\ndestino: " + destino + ", "
-                + "\nduración: " + duracionViaje + ", "
-                + "\nfechaSalida: " + fechaSalida + ", "
                 + "\nhoraSalida: " + horaSalida + ", "
                 + "\nhoraLlegada: " + horaLlegada + ", "
                 + "\nprecio: " + precio + ", "
