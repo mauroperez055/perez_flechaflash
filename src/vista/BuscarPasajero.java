@@ -370,7 +370,6 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
             if (pasajeroEncontrado != null) {
                 btnActualizar.setEnabled(true);
                 btnGuardar.setEnabled(false);
-//                btnEliminar.setEnabled(false);
                 btnEliminar.setEnabled(true);
                 btnAlta.setEnabled(false);
                 btnBaja.setEnabled(false);

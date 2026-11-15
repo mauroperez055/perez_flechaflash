@@ -310,6 +310,14 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             
             Viaje viajeNuevo = new Viaje(origen, destino, Time.valueOf(horaSalida), Time.valueOf(horaLlegada), colectivoSeleccionado, precio, true);
             
+            // verifico la disponiblidad
+            String error = viajeData.verificarDisponibilidad(viajeNuevo);
+            
+            if (error != null) {
+                JOptionPane.showMessageDialog(this, error, "Error de disponiblidad", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             viajeData.cargarViaje(viajeNuevo);
             
             /* con este dato creo los lugares que corresponden*/
@@ -322,9 +330,14 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             
             lugares = 0;
             
+            JOptionPane.showMessageDialog(this, "Viaje creado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+            
         } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) { // si ya existe la matricula
+            if (e.getErrorCode() == 1062) { 
                 JOptionPane.showMessageDialog(this, "Ya existe un viaje registrado con esos datos.", "Viaje duplicado", JOptionPane.WARNING_MESSAGE);
+                VistaPrincipal.limpiarCampos(pnlDatos);
                 return;
             } else {
                 JOptionPane.showMessageDialog(this, "Error al guardar el colectivo.", "Atención", JOptionPane.ERROR_MESSAGE);
@@ -366,6 +379,10 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
 
     private void btnCalcHoraLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcHoraLlegadaActionPerformed
         // TODO add your handling code here:
+        if (txtDuracion.getText().equals("")) {
+            return;
+        }
+        
         int duracion = Integer.parseInt(txtDuracion.getText());
         horaSalidaElegida = cboHoraSalida.getSelectedItem().toString();
         

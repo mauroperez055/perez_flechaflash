@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Time;
+import java.time.LocalTime;
+import java.util.Comparator;
 import modelo.Colectivo;
 import modelo.Viaje;
 
@@ -95,16 +97,17 @@ public class ViajeData {
     }
     
     public void actualizarViaje(Viaje viaje) throws SQLException {
-        String sql = "UPDATE viajes SET origen = ?, destino = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ? WHERE idViaje = ?";
+        String sql = "UPDATE viajes SET origen = ?, destino = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ?, estado = ? WHERE idViaje = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, viaje.getOrigen());
             ps.setString(2, viaje.getDestino());
-            ps.setTime(5, viaje.getHoraSalida());
-            ps.setTime(6, viaje.getHoraLlegada());
-            ps.setInt(7, viaje.getColectivo().getIdColectivo());
-            ps.setInt(8, viaje.getIdViaje());
+            ps.setTime(3, viaje.getHoraSalida());
+            ps.setTime(4, viaje.getHoraLlegada());
+            ps.setInt(5, viaje.getColectivo().getIdColectivo());
+            ps.setDouble(6, viaje.getPrecio());
+            ps.setInt(7, viaje.getIdViaje());
             
             int exito = ps.executeUpdate();
             
@@ -320,5 +323,107 @@ public class ViajeData {
             System.out.println("No fue posible realizar la consulta." + e.getMessage());
             throw e;
         }
+    }
+    
+    public boolean tienePasajes(int idViaje) throws SQLException {
+        String sql ="SELECT EXISTS ( "
+                        + "SELECT 1 "
+                        + "FROM pasajes "
+                        + "WHERE idViaje = ? "
+                        + ") AS tienePasajes;";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idViaje);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                boolean tienePasajes;
+                return rs.getBoolean("tienePasajes");
+            }
+            
+            return false;
+        } catch (SQLException e) {
+            System.out.println("No se pudo verificar si tiene pasajes." + e.getMessage());
+            throw e;
+        }
+    }
+    
+    public String verificarDisponibilidad(Viaje viaje) throws SQLException {
+        String sql = "SELECT horaSalida, horaLlegada FROM viajes WHERE idColectivo = ? AND estado = 1 AND idViaje <> ?";
+        
+        // usamos las horas en minutos porque es mas facil comparar enteros
+        int inicioNuevo = horasAMinutos(viaje.getHoraSalida());
+        int finNuevo = horasAMinutos(viaje.getHoraLlegada());
+        
+        // si el viaje termina pasando la medianoche necesitamos sumarle un dia entero en minutos
+        if (finNuevo < inicioNuevo) {
+            finNuevo += 1440;
+        }
+        
+                                System.out.println("===== VIAJE NUEVO =====");
+                                System.out.println("ID viaje: " + viaje.getIdViaje());
+                                System.out.println("ID colectivo: " + viaje.getColectivo().getIdColectivo());
+                                System.out.println("Salida: " + viaje.getHoraSalida());
+                                System.out.println("Llegada: " + viaje.getHoraLlegada());
+
+                                System.out.println("Inicio nuevo: " + inicioNuevo);
+                                System.out.println("Fin nuevo: " + finNuevo);
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, viaje.getColectivo().getIdColectivo());
+            ps.setInt(2, viaje.getIdViaje());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int inicioExistente = horasAMinutos(rs.getTime("horaSalida"));
+                int finExistente = horasAMinutos(rs.getTime("horaLlegada"));
+                
+                                            System.out.println("===== VIAJE EXISTENTE =====");
+                                            System.out.println("Salida: " + rs.getTime("horaSalida"));
+                                            System.out.println("Llegada: " + rs.getTime("horaLlegada"));
+
+                                            System.out.println("Inicio existente: " + inicioExistente);
+                                            System.out.println("Fin existente: " + finExistente);
+                
+                // si el viaje que ya existe termina pasada la medianoche tenemos que sumar un dia entero en minutos
+                if (finExistente < inicioExistente) {
+                    finExistente += 1440;
+                }
+                
+                // como los viajes son programados diariamente hay que comparar en intervalos
+                // del dia anterior y siguiente 
+                for (int desplazamiento = -1440; desplazamiento <= 1440; desplazamiento += 1440) {
+                    int inicioDesplazado = inicioExistente + desplazamiento;
+                    int finDesplazado = finExistente + desplazamiento;
+                    
+                    boolean superposicion = inicioNuevo < finDesplazado && finNuevo > inicioDesplazado;
+                    
+                                                        System.out.println("Desplazamiento: " + desplazamiento);
+                                                        System.out.println("Inicio comparado: " + inicioDesplazado);
+                                                        System.out.println("Fin comparado: " + finDesplazado);
+
+                                                        System.out.println("¿Se superponen?: " + superposicion);
+                    
+                    if (superposicion) {
+                        return "El colectivo ya tiene asignado un viaje en ese rango horario.";
+                    }
+                }
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo verificar la disponibilidad" + e.getMessage());
+            throw e;
+        }
+        
+        // si no se encuentra ninguna superposicion
+        return null;
+    }
+    
+    private int horasAMinutos(Time hora) {
+        return hora.toLocalTime().toSecondOfDay() / 60;
     }
 }

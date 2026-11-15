@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import modelo.Pasaje;
 
 public class PasajeData {
@@ -48,4 +46,5 @@ public class PasajeData {
             throw e;
         }
     }
+    
 }

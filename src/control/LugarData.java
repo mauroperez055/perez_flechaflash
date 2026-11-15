@@ -36,7 +36,7 @@ public class LugarData {
                 System.out.println("No se pudo obtener el id del lugar");
             }
             
-            System.out.println("Lugar creado.");
+//            System.out.println("Lugar creado.");
             ps.close();
         } catch (SQLException e) {
             System.out.println("No se pudo crear el lugar." + e.getMessage());

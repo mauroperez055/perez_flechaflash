@@ -17,6 +17,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -85,6 +86,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnInformesCole = new javax.swing.JButton();
         btnListarPasajeFecha = new javax.swing.JButton();
         btnColesViajes = new javax.swing.JButton();
+        btnBuscarViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlechaFlash");
@@ -96,7 +98,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 951, Short.MAX_VALUE)
+            .addGap(0, 962, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,6 +364,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarViaje.setBackground(new java.awt.Color(49, 144, 127));
+        btnBuscarViaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnBuscarViaje.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search-travel.png"))); // NOI18N
+        btnBuscarViaje.setText("Buscar viaje");
+        btnBuscarViaje.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnBuscarViaje.setContentAreaFilled(false);
+        btnBuscarViaje.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarViaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBuscarViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarViajeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFormsLayout = new javax.swing.GroupLayout(pnlForms);
         pnlForms.setLayout(pnlFormsLayout);
         pnlFormsLayout.setHorizontalGroup(
@@ -395,7 +412,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnColesViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnColesViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlFormsLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,10 +461,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegistrarViaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscarViaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarViajes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnColesViajes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -649,6 +669,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnColesViajesActionPerformed
 
+    private void btnBuscarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarViajeActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        BuscarViaje buscarViaje = new BuscarViaje(viajeData);
+        buscarViaje.setVisible(true);
+        escritorio.add(buscarViaje);
+        buscarViaje.moveToFront();
+        escritorio.revalidate();
+        escritorio.repaint();
+    }//GEN-LAST:event_btnBuscarViajeActionPerformed
+
     
     /* Métodos auxiliares para control de entradas del usuario, llenar tablas, etc*/
     public static void validarEnteros(java.awt.event.KeyEvent evt, JTextField jText) {
@@ -724,6 +755,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
         return true;
     }
+    
     
     /* Metodo que formatea los String de nombres y apellidos para que tengan un formato coherente, por ejemplo:
     *   ingresa: MaurO pErez y se guarda; Mauro Perez
@@ -880,6 +912,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarCole;
     private javax.swing.JButton btnBuscarPasaje;
     private javax.swing.JButton btnBuscarPasajero;
+    private javax.swing.JButton btnBuscarViaje;
     private javax.swing.JButton btnColesViajes;
     private javax.swing.JButton btnConsultarLugares;
     private javax.swing.JButton btnEmitirPasaje;
