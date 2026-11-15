@@ -672,7 +672,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnBuscarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarViajeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        BuscarViaje buscarViaje = new BuscarViaje(viajeData);
+        BuscarViaje buscarViaje = new BuscarViaje(viajeData, colectivoData);
         buscarViaje.setVisible(true);
         escritorio.add(buscarViaje);
         buscarViaje.moveToFront();

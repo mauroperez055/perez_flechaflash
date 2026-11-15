@@ -1,21 +1,26 @@
 
 package vista;
 
+import control.ColectivoData;
 import control.ViajeData;
 import javax.swing.JOptionPane;
 import modelo.Viaje;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import javax.swing.JDesktopPane;
+import javax.swing.SwingUtilities;
 
 public class BuscarViaje extends javax.swing.JInternalFrame {
 
+    private ColectivoData colectivoData;
     private Viaje viajeEncontrado;
     private ViajeData viajeData;
     
-    public BuscarViaje(ViajeData viajeData) {
+    public BuscarViaje(ViajeData viajeData, ColectivoData colectivoData) {
         initComponents();
         this.viajeData = viajeData;
+        this.colectivoData = colectivoData;
         
         VistaPrincipal.desActivarCampos(pnlDatos, false);
         VistaPrincipal.desactivarBotones(pnlButtons);
@@ -124,6 +129,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
 
         btnCambiarCole.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnCambiarCole.setText("Cambiar");
+        btnCambiarCole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarColeActionPerformed(evt);
+            }
+        });
 
         btnCambiarHoraSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnCambiarHoraSalida.setText("Cambiar");
@@ -165,9 +175,8 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                             .addComponent(txtDestino)
-                            .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtHoraLlegada, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtHoraSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHoraLlegada)
+                            .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnCambiarHoraSalida)))
@@ -244,6 +253,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
 
         btnGuardar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar Cambios");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlButtonsLayout = new javax.swing.GroupLayout(pnlButtons);
         pnlButtons.setLayout(pnlButtonsLayout);
@@ -453,6 +467,32 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         btnCambiarCole.setEnabled(true);
         btnCambiarHoraSalida.setEnabled(true);
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if (!VistaPrincipal.validarCamposVacios(pnlDatos)) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos.", "Atención", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+       
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCambiarColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarColeActionPerformed
+        // TODO add your handling code here:
+        try {
+            ElegirColectivo elegirCole = new ElegirColectivo(colectivoData);
+            // Obtengo el JDesktopPane que contiene a BuscarViaje 
+            JDesktopPane escritorio = (JDesktopPane) SwingUtilities.getAncestorOfClass(JDesktopPane.class, this);
+
+            escritorio.add(elegirCole);
+            elegirCole.setVisible(true);
+            elegirCole.moveToFront();
+            } catch (SQLException ex) {
+                System.getLogger(BuscarViaje.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        
+    }//GEN-LAST:event_btnCambiarColeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
