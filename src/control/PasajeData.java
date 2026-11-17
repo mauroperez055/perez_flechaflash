@@ -24,10 +24,11 @@ public class PasajeData {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pasaje.getPasajero().getIdPasajero());
             ps.setInt(2, pasaje.getLugar().getIdLugar());
-            ps.setInt(3, pasaje.getViaje().getIdViaje());
+            ps.setInt(3, pasaje.getLugar().getViaje().getIdViaje());
             ps.setDate(4, Date.valueOf(pasaje.getFechaVenta()));
             ps.setTime(5, Time.valueOf(pasaje.getHoraVenta()));
             ps.setDouble(6, pasaje.getPrecio());
+            ps.setBoolean(7, true);
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();

@@ -97,7 +97,7 @@ public class ViajeData {
     }
     
     public void actualizarViaje(Viaje viaje) throws SQLException {
-        String sql = "UPDATE viajes SET origen = ?, destino = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ?, estado = ? WHERE idViaje = ?";
+        String sql = "UPDATE viajes SET origen = ?, destino = ?, horaSalida = ?, horaLlegada = ?, idColectivo = ?, precio = ? WHERE idViaje = ?";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -339,7 +339,6 @@ public class ViajeData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                boolean tienePasajes;
                 return rs.getBoolean("tienePasajes");
             }
             
@@ -362,15 +361,6 @@ public class ViajeData {
             finNuevo += 1440;
         }
         
-                                System.out.println("===== VIAJE NUEVO =====");
-                                System.out.println("ID viaje: " + viaje.getIdViaje());
-                                System.out.println("ID colectivo: " + viaje.getColectivo().getIdColectivo());
-                                System.out.println("Salida: " + viaje.getHoraSalida());
-                                System.out.println("Llegada: " + viaje.getHoraLlegada());
-
-                                System.out.println("Inicio nuevo: " + inicioNuevo);
-                                System.out.println("Fin nuevo: " + finNuevo);
-        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, viaje.getColectivo().getIdColectivo());
@@ -381,13 +371,6 @@ public class ViajeData {
             while (rs.next()) {
                 int inicioExistente = horasAMinutos(rs.getTime("horaSalida"));
                 int finExistente = horasAMinutos(rs.getTime("horaLlegada"));
-                
-                                            System.out.println("===== VIAJE EXISTENTE =====");
-                                            System.out.println("Salida: " + rs.getTime("horaSalida"));
-                                            System.out.println("Llegada: " + rs.getTime("horaLlegada"));
-
-                                            System.out.println("Inicio existente: " + inicioExistente);
-                                            System.out.println("Fin existente: " + finExistente);
                 
                 // si el viaje que ya existe termina pasada la medianoche tenemos que sumar un dia entero en minutos
                 if (finExistente < inicioExistente) {
@@ -401,12 +384,6 @@ public class ViajeData {
                     int finDesplazado = finExistente + desplazamiento;
                     
                     boolean superposicion = inicioNuevo < finDesplazado && finNuevo > inicioDesplazado;
-                    
-                                                        System.out.println("Desplazamiento: " + desplazamiento);
-                                                        System.out.println("Inicio comparado: " + inicioDesplazado);
-                                                        System.out.println("Fin comparado: " + finDesplazado);
-
-                                                        System.out.println("¿Se superponen?: " + superposicion);
                     
                     if (superposicion) {
                         return "El colectivo ya tiene asignado un viaje en ese rango horario.";
@@ -425,5 +402,27 @@ public class ViajeData {
     
     private int horasAMinutos(Time hora) {
         return hora.toLocalTime().toSecondOfDay() / 60;
+    }
+
+    public void eliminarLugaresAnteriores(int idViaje) throws SQLException {
+        String sql ="DELETE FROM lugares WHERE idViaje = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idViaje);
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                System.out.println("Se eliminaron los lugares del viaje " + idViaje);
+            } else {
+                System.out.println("No se pudo eliminar los lugares.");
+            }
+            
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Error al intentar eliminar los lugares." + e.getMessage());
+            throw e;
+        }
     }
 }

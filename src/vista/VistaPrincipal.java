@@ -672,12 +672,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnBuscarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarViajeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        BuscarViaje buscarViaje = new BuscarViaje(viajeData, colectivoData);
-        buscarViaje.setVisible(true);
-        escritorio.add(buscarViaje);
-        buscarViaje.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        BuscarViaje buscarViaje;
+        try {
+            buscarViaje = new BuscarViaje(viajeData, colectivoData, lugarData);
+            buscarViaje.setVisible(true);
+            escritorio.add(buscarViaje);
+            buscarViaje.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnBuscarViajeActionPerformed
 
     
@@ -750,6 +756,22 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 if (combo.getSelectedItem() == null || !combo.isEnabled() || combo.getSelectedItem().toString().isEmpty()) {
                     return false;
                 }
+            }
+
+        }
+        return true;
+    }
+    
+    public static boolean validarCamposVaciosSinCombo(JPanel jPanel) {
+        
+        for (int i = 0; i < jPanel.getComponents().length; i++) {
+            
+            if (jPanel.getComponents()[i] instanceof JTextField) {
+                JTextField caja = (JTextField) jPanel.getComponents()[i];
+                if (caja.getText().trim().isEmpty()) {
+                    return false;
+                }
+                
             }
 
         }

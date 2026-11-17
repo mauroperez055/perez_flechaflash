@@ -2,36 +2,54 @@
 package vista;
 
 import control.ColectivoData;
+import control.LugarData;
 import control.ViajeData;
 import javax.swing.JOptionPane;
 import modelo.Viaje;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import javax.swing.JDesktopPane;
-import javax.swing.SwingUtilities;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import modelo.Colectivo;
+import modelo.Lugar;
 
 public class BuscarViaje extends javax.swing.JInternalFrame {
 
     private ColectivoData colectivoData;
     private Viaje viajeEncontrado;
     private ViajeData viajeData;
+    private ArrayList<Colectivo> colectivosActivos;
+    private Colectivo coleElegido;
+    private ArrayList<Lugar> lugaresCreados;
+    private LugarData lugarData;
+    private Viaje viajeActualizado;
     
-    public BuscarViaje(ViajeData viajeData, ColectivoData colectivoData) {
+    public BuscarViaje(ViajeData viajeData, ColectivoData colectivoData, LugarData lugarData) throws SQLException {
         initComponents();
         this.viajeData = viajeData;
         this.colectivoData = colectivoData;
+        this.colectivosActivos = colectivoData.listarColectivosActivos();
+        this.lugarData = lugarData;
         
         VistaPrincipal.desActivarCampos(pnlDatos, false);
         VistaPrincipal.desactivarBotones(pnlButtons);
+       btnCalcularHoraLlegada.setEnabled(false);
+       btnCambiarDuracion.setEnabled(false);
+       btnCambiarHoraSalida.setEnabled(false);
         btnCambiarCole.setEnabled(false);
-        btnCambiarHoraSalida.setEnabled(false);
         chbxEstado.setEnabled(false);
         txtLugares.setEditable(false);
-        txtColectivos.setEditable(false);
         txtHoraLlegada.setEditable(false);
-        txtHoraSalida.setEditable(false);
+//        txtHoraSalida.setEditable(false);
         txtDuracion.setEditable(false);
+        
+        cboColectivos.removeAllItems();
+        cboColectivos.setEnabled(false);
+        cboHoraSalida.removeAllItems();
+        cboHoraSalida.setEnabled(false);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -45,8 +63,6 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         txtPrecio = new javax.swing.JTextField();
         txtDestino = new javax.swing.JTextField();
         txtOrigen = new javax.swing.JTextField();
-        txtColectivos = new javax.swing.JTextField();
-        txtHoraSalida = new javax.swing.JTextField();
         txtHoraLlegada = new javax.swing.JTextField();
         txtLugares = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -59,9 +75,14 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         chbxEstado = new javax.swing.JCheckBox();
         btnCambiarCole = new javax.swing.JButton();
+        cboColectivos = new javax.swing.JComboBox<>();
         btnCambiarHoraSalida = new javax.swing.JButton();
+        btnCalcularHoraLlegada = new javax.swing.JButton();
+        btnCambiarDuracion = new javax.swing.JButton();
         txtDuracion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cboHoraSalida = new javax.swing.JComboBox<>();
         btnBuscarViaje = new javax.swing.JButton();
         pnlButtons = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
@@ -94,10 +115,6 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         txtDestino.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         txtOrigen.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-
-        txtColectivos.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-
-        txtHoraSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         txtHoraLlegada.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
@@ -135,13 +152,40 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             }
         });
 
+        cboColectivos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboColectivosItemStateChanged(evt);
+            }
+        });
+
         btnCambiarHoraSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnCambiarHoraSalida.setText("Cambiar");
+        btnCambiarHoraSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarHoraSalidaActionPerformed(evt);
+            }
+        });
+
+        btnCalcularHoraLlegada.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnCalcularHoraLlegada.setText("Calcular");
+
+        btnCambiarDuracion.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnCambiarDuracion.setText("Cambiar");
+        btnCambiarDuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarDuracionActionPerformed(evt);
+            }
+        });
 
         txtDuracion.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel11.setText("Duración:");
+
+        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
+        jLabel12.setText("minutos");
+
+        cboHoraSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
@@ -155,32 +199,49 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chbxEstado)
-                            .addComponent(txtColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCambiarCole))
+                            .addGroup(pnlDatosLayout.createSequentialGroup()
+                                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chbxEstado)
+                                    .addComponent(txtLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCambiarCole))
+                            .addGroup(pnlDatosLayout.createSequentialGroup()
+                                .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCalcularHoraLlegada))))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel11))
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                            .addComponent(txtDestino)
-                            .addComponent(txtHoraLlegada)
-                            .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDestino))
+                        .addGap(103, 103, 103))
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
                         .addGap(18, 18, 18)
-                        .addComponent(btnCambiarHoraSalida)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlDatosLayout.createSequentialGroup()
+                                .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCambiarHoraSalida))
+                            .addGroup(pnlDatosLayout.createSequentialGroup()
+                                .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCambiarDuracion)))
+                        .addGap(96, 96, 96)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,22 +256,32 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(btnCambiarHoraSalida))
+                    .addComponent(btnCambiarDuracion)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5))
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCambiarHoraSalida))))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(btnCalcularHoraLlegada))
                 .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(btnCambiarCole))
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(btnCambiarCole)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cboColectivos)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,17 +395,12 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarViaje)))
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarViaje)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -343,6 +409,10 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,12 +456,20 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró el viaje.", "Atención", JOptionPane.WARNING_MESSAGE);
                 VistaPrincipal.limpiarCampos(pnlDatos);
                 VistaPrincipal.desactivarBotones(pnlButtons);
+                btnCalcularHoraLlegada.setEnabled(false);
+                btnCambiarDuracion.setEnabled(false);
+                btnCambiarHoraSalida.setEnabled(false);
                 return;
             }
 
             if (viajeEncontrado != null) {
                 if (viajeData.tienePasajes(viajeEncontrado.getIdViaje())) {
                     VistaPrincipal.desactivarBotones(pnlButtons);
+                    btnCalcularHoraLlegada.setEnabled(false);
+                    btnCambiarDuracion.setEnabled(false);
+                    btnCambiarHoraSalida.setEnabled(false);
+                    cargarCboColes(cboColectivos);
+                    cargarCboHorarioSalida(cboHoraSalida);
                     JOptionPane.showMessageDialog(
                         this, 
                         "El viaje tiene pasajes vendidos, por lo que no puede actualizar ningun dato.",
@@ -407,6 +485,9 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                     btnBaja.setEnabled(false);
                     VistaPrincipal.desActivarCampos(pnlDatos, false);
                     
+                    cargarCboColes(cboColectivos);
+                    cargarCboHorarioSalida(cboHoraSalida);
+                    
                     if (viajeEncontrado.isActivo()) {
                         btnBaja.setEnabled(true);
                     } else {
@@ -421,7 +502,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             
             LocalTime horaSalida = viajeEncontrado.getHoraSalida().toLocalTime();
             LocalTime horaLlegada = viajeEncontrado.getHoraLlegada().toLocalTime();
-            txtHoraSalida.setText(horaSalida.withSecond(0).withNano(0).toString());
+//            txtHoraSalida.setText(horaSalida.withSecond(0).withNano(0).toString());
             txtHoraLlegada.setText(horaLlegada.withSecond(0).withNano(0).toString());
             
             long duracion = ChronoUnit.MINUTES.between(horaSalida, horaLlegada);
@@ -432,11 +513,13 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             
             txtDuracion.setText(String.valueOf(duracion));
 
-            String colectivo = viajeEncontrado.getColectivo().getIdColectivo() + 
-                    " - " + viajeEncontrado.getColectivo().getMatricula() + 
-                    " - " + viajeEncontrado.getColectivo().getCapacidad() + " lugares";
+//            String colectivo = viajeEncontrado.getColectivo().getIdColectivo() + 
+//                    " - " + viajeEncontrado.getColectivo().getMatricula() + 
+//                    " - " + viajeEncontrado.getColectivo().getCapacidad() + " lugares";
             
-            txtColectivos.setText(colectivo);
+            
+            
+//            txtColectivos.setText(colectivo);
             txtLugares.setText(String.valueOf(viajeEncontrado.getColectivo().getCapacidad()));
             txtPrecio.setText(String.valueOf(viajeEncontrado.getPrecio()));
             chbxEstado.setSelected(viajeEncontrado.isActivo());
@@ -454,8 +537,10 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         chbxEstado.setSelected(false);
         txtBuscarViaje.setText("");
         VistaPrincipal.desactivarBotones(pnlButtons);
-        btnCambiarCole.setEnabled(false);
+        btnCalcularHoraLlegada.setEnabled(false);
+        btnCambiarDuracion.setEnabled(false);
         btnCambiarHoraSalida.setEnabled(false);
+        btnCambiarCole.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -465,50 +550,197 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnActualizar.setEnabled(false);
         btnCambiarCole.setEnabled(true);
+        cboColectivos.setEnabled(false);
+        cboHoraSalida.setEnabled(false);
+//        btnCalcularHoraLlegada.setEnabled(true);
+        btnCambiarDuracion.setEnabled(true);
         btnCambiarHoraSalida.setEnabled(true);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if (!VistaPrincipal.validarCamposVacios(pnlDatos)) {
+        if (!VistaPrincipal.validarCamposVaciosSinCombo(pnlDatos)) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos.", "Atención", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        try {
+            int idViaje = viajeEncontrado.getIdViaje();
+            String origen = txtOrigen.getText();
+            origen = VistaPrincipal.formatearNombresApellidos(origen);
+            String destino = txtDestino.getText();
+            destino = VistaPrincipal.formatearNombresApellidos(destino);
+//            LocalTime horaSalida = LocalTime.parse(txtHoraSalida.getText());
+            LocalTime horaLlegada = LocalTime.parse(txtHoraLlegada.getText());
+            double precio = Double.parseDouble(txtPrecio.getText());
+            boolean estado = viajeEncontrado.isActivo();
+            
+            // si cambie de colectivo
+            if (viajeEncontrado.getColectivo().getIdColectivo() != coleElegido.getIdColectivo()) {
+                /* elimino los lugares creados por el colectivo anterior */
+                int idViajeEncontrado = viajeEncontrado.getIdViaje();
+                viajeData.eliminarLugaresAnteriores(idViajeEncontrado);
+
+                /* creo los lugares correspondientes al colectivo nuevo*/
+                int capacidad = Integer.parseInt(txtLugares.getText());
+                lugaresCreados = VistaPrincipal.crearLugares(capacidad, viajeEncontrado);
+                
+                for (Lugar lugar : lugaresCreados) {
+                    lugarData.crearLugar(lugar);
+                }
+                
+                capacidad = 0;
+                
+            } else {
+                // no cambie de colectivo
+                coleElegido = viajeEncontrado.getColectivo();
+            }
+            
+//            viajeActualizado = new Viaje(idViaje, origen, destino, Time.valueOf(horaSalida), Time.valueOf(horaLlegada), coleElegido, precio, estado);
+            
+            /* verifico que el colectivo que elegi este disponible */
+            String error = viajeData.verificarDisponibilidad(viajeActualizado);
+            
+            if (error != null) {
+                JOptionPane.showMessageDialog(this, error, "Error de disponiblidad", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            viajeData.actualizarViaje(viajeActualizado);
+            
+            JOptionPane.showMessageDialog(this, "El viaje fue actualizado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            
+            /* reinicio la vista*/
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desActivarCampos(pnlDatos, false);
+            chbxEstado.setSelected(false);
+            txtBuscarViaje.setText("");
+            VistaPrincipal.desactivarBotones(pnlButtons);
+            btnCambiarCole.setEnabled(false);
+            btnCalcularHoraLlegada.setEnabled(false);
+            btnCambiarDuracion.setEnabled(false);
+            btnCambiarHoraSalida.setEnabled(false);
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar el viaje", "Atención", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
-       
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCambiarColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarColeActionPerformed
         // TODO add your handling code here:
-        try {
-            ElegirColectivo elegirCole = new ElegirColectivo(colectivoData);
-            // Obtengo el JDesktopPane que contiene a BuscarViaje 
-            JDesktopPane escritorio = (JDesktopPane) SwingUtilities.getAncestorOfClass(JDesktopPane.class, this);
-
-            escritorio.add(elegirCole);
-            elegirCole.setVisible(true);
-            elegirCole.moveToFront();
-            } catch (SQLException ex) {
-                System.getLogger(BuscarViaje.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
-        
+        cboColectivos.setEnabled(true);
     }//GEN-LAST:event_btnCambiarColeActionPerformed
 
+    private void cboColectivosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboColectivosItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() != java.awt.event.ItemEvent.SELECTED) {
+                return;
+        }
 
+        try {
+            String matriculaColeElegido = cboColectivos.getSelectedItem().toString().split(" - ")[1].trim();
+            coleElegido = colectivoData.buscarColectivoMatricula(matriculaColeElegido);
+            
+            int capacidadColeElegido = coleElegido.getCapacidad();
+            txtLugares.setText(String.valueOf(capacidadColeElegido));
+        } catch (SQLException ex) {
+            System.getLogger(BuscarViaje.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_cboColectivosItemStateChanged
+
+    private void btnCambiarHoraSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarHoraSalidaActionPerformed
+        // TODO add your handling code here:
+        cboHoraSalida.setEnabled(true);
+        btnCalcularHoraLlegada.setEnabled(true);
+    }//GEN-LAST:event_btnCambiarHoraSalidaActionPerformed
+
+    private void btnCambiarDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarDuracionActionPerformed
+        // TODO add your handling code here:
+        txtDuracion.setText("");
+        txtDuracion.setEditable(true);
+        btnCalcularHoraLlegada.setEnabled(true);
+    }//GEN-LAST:event_btnCambiarDuracionActionPerformed
+
+
+    public void actualizarCole(String colectivo, int capacidad) {
+        
+        txtLugares.setText(String.valueOf(capacidad));
+    }
+    
+    private void cargarCboColes(JComboBox cboColectivos) {
+        cboColectivos.removeAllItems();
+        for (Colectivo cole : colectivosActivos) {
+            cboColectivos.addItem(
+                    cole.getIdColectivo() + " - " +
+                    cole.getMatricula() + " - " +
+                    cole.getCapacidad() + " lugares"
+            );
+        }
+
+        for (int i = 0; i < cboColectivos.getItemCount(); i++) {
+            String item = (String) cboColectivos.getItemAt(i);
+
+            int idColectivo = Integer.parseInt(item.split(" - ")[0]);
+
+            if (idColectivo == viajeEncontrado.getColectivo().getIdColectivo()) {
+                cboColectivos.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        cboColectivos.setEnabled(false);
+    }
+    
+    public void cargarCboHorarioSalida(JComboBox cboHoraSalida) {
+        cboHoraSalida.removeAllItems();
+        VistaPrincipal.cargarCboxHorariosSalida(cboHoraSalida);
+        
+        LocalTime horaViaje = viajeEncontrado.getHoraSalida().toLocalTime();
+
+        for (int i = 0;  i < cboHoraSalida.getItemCount();  i++) {
+            String horario = cboHoraSalida.getItemAt(i).toString();
+
+            LocalTime horaCombo = LocalTime.parse(horario);
+
+            if (horaCombo.equals(horaViaje)) {
+                cboHoraSalida.setSelectedIndex(i);
+                break;
+            }
+        }
+        
+//        for (int i = 0; i < cboHoraSalida.getItemCount(); i++) {
+//            String horario = cboHoraSalida.getItemAt(i).toString();
+//            
+//            if (horario.equals(viajeEncontrado.getHoraSalida().toString())) {
+//                cboHoraSalida.setSelectedIndex(i);
+//                break;
+//            }
+//        }
+        
+        this.cboHoraSalida.setEnabled(false);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnBaja;
     private javax.swing.JButton btnBuscarViaje;
+    private javax.swing.JButton btnCalcularHoraLlegada;
     private javax.swing.JButton btnCambiarCole;
+    private javax.swing.JButton btnCambiarDuracion;
     private javax.swing.JButton btnCambiarHoraSalida;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JComboBox<String> cboColectivos;
+    private javax.swing.JComboBox<String> cboHoraSalida;
     private javax.swing.JCheckBox chbxEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -521,11 +753,9 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JTextField txtBuscarViaje;
-    private javax.swing.JTextField txtColectivos;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtHoraLlegada;
-    private javax.swing.JTextField txtHoraSalida;
     private javax.swing.JTextField txtLugares;
     private javax.swing.JTextField txtOrigen;
     private javax.swing.JTextField txtPrecio;
