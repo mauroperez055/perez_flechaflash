@@ -304,6 +304,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
 
         btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnBaja.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnBaja.setText("Baja");
@@ -646,6 +651,28 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         txtHoraLlegada.setText(horaLlegada.toString());
     }//GEN-LAST:event_cboHoraSalidaActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        try {        
+            int eleccion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el viaje?", "Eliminar Viaje", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        
+            if (eleccion == 0) {
+                viajeData.eliminarViaje(viajeEncontrado);
+                JOptionPane.showMessageDialog(this, "Viaje eliminado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                VistaPrincipal.limpiarCampos(pnlDatos);
+                VistaPrincipal.desactivarBotones(pnlButtons);
+                chbxEstado.setSelected(false);
+                return;
+            } else if (eleccion == 1) {
+                return;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el viaje.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     public void actualizarCole(String colectivo, int capacidad) {
         
         txtLugares.setText(String.valueOf(capacidad));
@@ -691,15 +718,6 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 break;
             }
         }
-        
-//        for (int i = 0; i < cboHoraSalida.getItemCount(); i++) {
-//            String horario = cboHoraSalida.getItemAt(i).toString();
-//            
-//            if (horario.equals(viajeEncontrado.getHoraSalida().toString())) {
-//                cboHoraSalida.setSelectedIndex(i);
-//                break;
-//            }
-//        }
         
         this.cboHoraSalida.setEnabled(false);
     }

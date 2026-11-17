@@ -488,7 +488,7 @@ public class BuscarPasajero extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         try {
-            int eleccion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el pasajero?", "Eliminar Pasajero", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            int eleccion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el pasajero?", "Eliminar Pasajero", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
             if (eleccion == 0) {
                 pasajeroData.eliminarPasajero(pasajeroEncontrado);
