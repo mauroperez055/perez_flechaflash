@@ -246,5 +246,30 @@ public class ColectivoData {
            throw e;
        }
     }
+    
+    public boolean tieneViajes(int idColectivo) throws SQLException {
+        String sql = "SELECT EXISTS ( "
+                                + "SELECT 1 "
+                                + "FROM viajes "
+                                + "WHERE idColectivo = ? "
+                                + ") AS tieneViajes";
+        
+        try {
+            PreparedStatement ps =conexion.prepareStatement(sql);
+            ps.setInt(1, idColectivo);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getBoolean("tieneViajes");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error al verificar viajes." + e.getMessage());
+            throw e;
+        }
+        
+        return false;
+    }
 
 }

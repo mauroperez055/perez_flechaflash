@@ -203,12 +203,12 @@ public class ViajeData {
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
-                        + "WHERE v." + criterio + " LIKE ? "
-                        + "AND v.estado = 1";
+                        + "WHERE v." + criterio + " = ? "
+                        + "ORDER BY v.horaSalida ASC";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, "%" + valor + "%");
+            ps.setString(1, valor);
             
             ResultSet rs = ps.executeQuery();
             
@@ -240,6 +240,36 @@ public class ViajeData {
             System.out.println("No se pudo encontrar los viajes." + e.getMessage());
             throw e;
         }
+    }
+    
+    public ArrayList<String> listarDestinos() throws SQLException {
+        ArrayList<String> destinos = new ArrayList<>();
+        
+        String sql = "SELECT DISTINCT destino FROM viajes ORDER BY destino";
+
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            destinos.add(rs.getString("destino"));
+        }
+
+        return destinos;
+    }
+    
+    public ArrayList<String> listarOrigenes() throws SQLException {
+        ArrayList<String> origenes = new ArrayList<>();
+        
+        String sql = "SELECT DISTINCT origen FROM viajes ORDER BY origen";
+
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            origenes.add(rs.getString("origen"));
+        }
+
+        return origenes;
     }
     
     /* Todos los viajes activos */
@@ -280,6 +310,50 @@ public class ViajeData {
             }
             
             return viajesActivos;
+        } catch (SQLException e) {
+            System.out.println("No se pudo encontrar los viajes." + e.getMessage());
+            throw e;
+        }
+    }
+    
+    /* listar todos los viajes */
+    public ArrayList<Viaje> listarViajes() throws SQLException {
+        ArrayList<Viaje> viajes = new ArrayList<>();
+        String sql = "SELECT v.idViaje, v.origen, v.destino, v.horaSalida, v.horaLlegada, v.idColectivo, v.precio, v.estado AS estadoViaje, "
+                        + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
+                        + "FROM viajes v "
+                        + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
+                        + "ORDER BY v.horaSalida ASC";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int idViaje = rs.getInt("idVIaje");
+                String origenViaje = rs.getString("origen");
+                String destinoViaje = rs.getString("destino");
+                Time horaSalida = rs.getTime("horaSalida");
+                Time horaLlegada = rs.getTime("horaLlegada");
+                double precio = rs.getDouble("precio");
+                boolean estado = rs.getBoolean("estadoViaje");
+                
+                int idColectivo = rs.getInt("idColectivo");
+                String matricula = rs.getString("matricula");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                int capacidad = rs.getInt("capacidad");
+                String chofer = rs.getString("chofer");
+                boolean estadoCole = rs.getBoolean("estadoCole");
+                
+                Colectivo cole = new Colectivo(idColectivo, matricula, marca, modelo, capacidad, chofer, estadoCole);
+                Viaje viaje = new Viaje(idViaje, origenViaje, destinoViaje, horaSalida, horaLlegada, cole, precio, estado);
+                
+                viajes.add(viaje);
+            }
+            
+            return viajes;
         } catch (SQLException e) {
             System.out.println("No se pudo encontrar los viajes." + e.getMessage());
             throw e;

@@ -301,6 +301,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
 
         btnAlta.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -312,6 +317,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
 
         btnBaja.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnBaja.setText("Baja");
+        btnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar Cambios");
@@ -628,7 +638,8 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             int capacidadColeElegido = coleElegido.getCapacidad();
             txtLugares.setText(String.valueOf(capacidadColeElegido));
         } catch (SQLException ex) {
-            System.getLogger(BuscarViaje.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            JOptionPane.showMessageDialog(this, "Error al seleccionar un colectivo", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_cboColectivosItemStateChanged
 
@@ -672,6 +683,40 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             return;
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        // TODO add your handling code here:
+        try {
+            viajeData.altaLógicaViaje(viajeEncontrado);
+            
+            JOptionPane.showMessageDialog(this, "Viaje dado de alta.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desactivarBotones(pnlButtons);
+            chbxEstado.setSelected(false);
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo dar de alta el viaje.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
+        // TODO add your handling code here:
+        try {
+            viajeData.bajaLógicaViaje(viajeEncontrado);
+            JOptionPane.showMessageDialog(this, "Viaje dado de baja.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desactivarBotones(pnlButtons);
+            chbxEstado.setSelected(false);
+            return;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja el viaje.", "Atención", JOptionPane.ERROR_MESSAGE);
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            return;
+        }
+    }//GEN-LAST:event_btnBajaActionPerformed
 
     public void actualizarCole(String colectivo, int capacidad) {
         

@@ -442,6 +442,17 @@ public class BuscarCole extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         try {
+            
+            if (colectivoData.tieneViajes(coleEncontrado.getIdColectivo())) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se puede eliminar el colectivo porque tiene viajes asociados.",
+                    "Atención",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
             int eleccion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el colectivo?", "Eliminar Colectivo", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
             if (eleccion == 0) {
@@ -482,6 +493,16 @@ public class BuscarCole extends javax.swing.JInternalFrame {
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
         // TODO add your handling code here:
         try {
+            if (colectivoData.tieneViajes(coleEncontrado.getIdColectivo())) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se puede dar de baja el colectivo porque tiene viajes asociados.",
+                    "Atención",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
             colectivoData.bajaLógicaColectivo(coleEncontrado);
             JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             VistaPrincipal.limpiarCampos(pnlDatos);

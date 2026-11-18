@@ -85,7 +85,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnListarPasajePasajero = new javax.swing.JButton();
         btnInformesCole = new javax.swing.JButton();
         btnListarPasajeFecha = new javax.swing.JButton();
-        btnColesViajes = new javax.swing.JButton();
         btnBuscarViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -349,21 +348,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnColesViajes.setBackground(new java.awt.Color(49, 144, 127));
-        btnColesViajes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnColesViajes.setForeground(new java.awt.Color(0, 0, 0));
-        btnColesViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
-        btnColesViajes.setText("Ver colectivos de los viajes");
-        btnColesViajes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnColesViajes.setContentAreaFilled(false);
-        btnColesViajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnColesViajes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnColesViajes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnColesViajesActionPerformed(evt);
-            }
-        });
-
         btnBuscarViaje.setBackground(new java.awt.Color(49, 144, 127));
         btnBuscarViaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         btnBuscarViaje.setForeground(new java.awt.Color(0, 0, 0));
@@ -412,13 +396,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(btnListarViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistrarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnInformesCole, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnColesViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlFormsLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnConsultarLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnlFormsLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(pnlFormsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,8 +450,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarViaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarViajes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnColesViajes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -591,12 +575,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnListarViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarViajesActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        ListarViajes listarViajes = new ListarViajes();
-        listarViajes.setVisible(true);
-        escritorio.add(listarViajes);
-        listarViajes.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        ListarViajes listarViajes;
+        try {
+            listarViajes = new ListarViajes(viajeData);
+            listarViajes.setVisible(true);
+            escritorio.add(listarViajes);
+            listarViajes.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnListarViajesActionPerformed
 
     private void btnInformesColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesColeActionPerformed
@@ -664,10 +654,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.revalidate();
         escritorio.repaint();
     }//GEN-LAST:event_btnListarPasajeFechaActionPerformed
-
-    private void btnColesViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColesViajesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnColesViajesActionPerformed
 
     private void btnBuscarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarViajeActionPerformed
         // TODO add your handling code here:
@@ -848,6 +834,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }
     
+    public static void cargarTablaViajes(ArrayList<Viaje> viajes, JTable jTable) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        borraFilasTabla(modelo);
+        for (Viaje viaje : viajes) {
+            modelo.addRow(new Object[] {
+                viaje.getIdViaje(),
+                viaje.getOrigen(),
+                viaje.getDestino(),
+                viaje.getHoraSalida(),
+                viaje.getHoraLlegada(),
+                viaje.getColectivo().getIdColectivo() + " - " + viaje.getColectivo().getMatricula(),
+                viaje.getColectivo().getChofer(),
+                "$ " + viaje.getPrecio()
+            });
+        }
+        
+    }
+    
     /* metodo que sirve para redonder la hora que aparece en los combox */
     public static LocalTime redondearHora(LocalTime hora) {
         int minutos = hora.getMinute();
@@ -935,7 +939,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPasaje;
     private javax.swing.JButton btnBuscarPasajero;
     private javax.swing.JButton btnBuscarViaje;
-    private javax.swing.JButton btnColesViajes;
     private javax.swing.JButton btnConsultarLugares;
     private javax.swing.JButton btnEmitirPasaje;
     private javax.swing.JButton btnInformesCole;
