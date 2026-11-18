@@ -279,7 +279,8 @@ public class ViajeData {
                         + "c.matricula, c.marca, c.modelo, c.capacidad, c.chofer, c.estado AS estadoCole "
                         + "FROM viajes v "
                         + "INNER JOIN colectivos c ON v.idColectivo = c.idColectivo "
-                        + "WHERE v.estado = 1";
+                        + "WHERE v.estado = 1 "
+                        + "ORDER BY v.horaSalida ASC";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);

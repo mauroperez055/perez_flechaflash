@@ -6,13 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import modelo.Lugar;
 import modelo.Viaje;
 
 public class LugarData {
     private Connection conexion = null;
-    
-    private ViajeData viajeData;
 
     public LugarData(Conexion conex) {
         this.conexion = conex.buscarConexion();
@@ -160,6 +159,38 @@ public class LugarData {
             System.out.println("No se pudo dar de alta el lugar." + e.getMessage());
             throw e;
         }
+    }
+    
+    public ArrayList<Lugar> listarLugaresPorViaje(Viaje viaje) throws SQLException {
+        ArrayList<Lugar> lugaresDelViaje = new ArrayList<>();
+        
+        String sql = "SELECT idLugar, idViaje, numeroAsiento, estado "
+                        + "FROM lugares "
+                        + "WHERE idViaje = ? "
+                        + "ORDER BY numeroAsiento ASC;";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, viaje.getIdViaje());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int idLugar = rs.getInt("idLugar");
+                int numAsiento = rs.getInt("numeroAsiento");
+                boolean activo = rs.getBoolean("estado");
+                
+                Lugar lugar = new Lugar(idLugar, viaje, numAsiento, activo);
+                
+                lugaresDelViaje.add(lugar);
+            }
+            
+            return lugaresDelViaje;
+        } catch (SQLException e) {
+            System.out.println("No se pudo obtener los lugares del viaje." + e.getMessage());
+            throw e;
+        }
+        
     }
     
 }

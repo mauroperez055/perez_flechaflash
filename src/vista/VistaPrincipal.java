@@ -603,12 +603,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnConsultarLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarLugaresActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        ConsultarAsientos consultarAsientos = new ConsultarAsientos();
-        consultarAsientos.setVisible(true);
-        escritorio.add(consultarAsientos);
-        consultarAsientos.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        ConsultarAsientos consultarAsientos;
+        try {
+            consultarAsientos = new ConsultarAsientos(viajeData, colectivoData, lugarData);
+            consultarAsientos.setVisible(true);
+            escritorio.add(consultarAsientos);
+            consultarAsientos.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnConsultarLugaresActionPerformed
 
     private void btnListarPasajePasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajePasajeroActionPerformed
