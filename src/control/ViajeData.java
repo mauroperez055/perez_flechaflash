@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import modelo.Colectivo;
 import modelo.Viaje;
 
@@ -468,4 +469,14 @@ public class ViajeData {
             throw e;
         }
     }
+    
+    public boolean permiteVenta(Viaje viaje) {
+        LocalDateTime salida = LocalDateTime.of(
+            viaje.getFechaSalida(),
+            viaje.getHoraSalida().toLocalTime()
+        );
+
+        return LocalDateTime.now().isBefore(salida);
+    }
+
 }

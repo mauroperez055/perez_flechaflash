@@ -266,8 +266,16 @@ public class EmitirPasaje extends javax.swing.JInternalFrame {
             int idViaje = Integer.parseInt(partesViaje[partesViaje.length - 1]);
             viajeSeleccionado = viajeData.buscarViaje(idViaje);
             
-            if (viajeVencido(viajeSeleccionado)) {
-                gestionarViajeVencido();
+            if (!viajeData.permiteVenta(viajeSeleccionado)) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "El viaje ya pasó su fecha u horario de salida. No se pueden emitir pasajes.",
+                    "Venta no permitida",
+                    JOptionPane.WARNING_MESSAGE
+                );
+
+                limpiarSeleccionViaje();
+                cboViajes.setSelectedIndex(0);
                 return;
             }
             
@@ -360,6 +368,11 @@ public class EmitirPasaje extends javax.swing.JInternalFrame {
             
             Pasaje pasajeNuevo = new Pasaje(pasajeroSeleccionado, lugarSeleccionado, viajeSeleccionado, fechaVenta, horaventa, precio, estado);
             
+            if (!viajeData.permiteVenta(viajeSeleccionado)) {
+                JOptionPane.showMessageDialog(this,"No se pueden vender pasajes para un viaje que ya salió.","Venta no permitida",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             pasajeData.crearPasaje(pasajeNuevo);
             
             JOptionPane.showMessageDialog(this, "Pasaje emitido", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -433,44 +446,6 @@ public class EmitirPasaje extends javax.swing.JInternalFrame {
 //        
 //        return true;
 //    }
-    
-    private boolean viajeVencido(Viaje viaje) {
-        LocalDate fechaViaje = viaje.getFechaSalida();
-        LocalTime horaSalida = viaje.getHoraSalida().toLocalTime();
-
-        LocalDate hoy = LocalDate.now();
-
-        return fechaViaje.isBefore(hoy)
-                || (fechaViaje.equals(hoy)
-                && horaSalida.isBefore(LocalTime.now()));
-    }
-    
-    private void gestionarViajeVencido() throws SQLException {
-
-        int opcion = JOptionPane.showConfirmDialog(
-                this, "El viaje seleccionado ya pasó su fecha u horario de salida.\n"
-                + "¿Desea darlo de baja?", "Viaje vencido",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE
-        );
-
-        if (opcion == JOptionPane.YES_OPTION) {
-
-            viajeData.bajaLógicaViaje(viajeSeleccionado);
-
-            // Actualizar la lista de viajes activos
-            viajesActivos = viajeData.listarViajesActivos();
-
-            // Recargar el combo
-            cargarCboViajes(cboViajes);
-
-            JOptionPane.showMessageDialog(
-                    this, "El viaje fue dado de baja correctamente.", "Baja de viaje", JOptionPane.INFORMATION_MESSAGE
-            );
-        }
-
-        limpiarSeleccionViaje();
-    }
     
     private void limpiarSeleccionViaje() {
 

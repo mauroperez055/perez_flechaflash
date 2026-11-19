@@ -39,7 +39,15 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
         txtHoraLlegada.setEditable(false);
         txtLugares.setEditable(false);
         dateChoosersalida.getDateEditor().setEnabled(false);
-        dateChoosersalida.setMinSelectableDate(new Date());
+        
+        /* esto es para que la fecha minima de salida sea una semana despues de la creacion del viaje*/
+        LocalDate fechaMinima = LocalDate.now().plusDays(7);
+        
+        Date fecha = Date.from(
+            fechaMinima.atStartOfDay(ZoneId.systemDefault()).toInstant()
+        );
+        
+        dateChoosersalida.setMinSelectableDate(fecha);
         
         VistaPrincipal.cargarCboxHorariosSalida(cboHoraSalida);
         
@@ -110,6 +118,11 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
         });
 
         txtPrecioBase.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        txtPrecioBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioBaseKeyTyped(evt);
+            }
+        });
 
         txtOrigen.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtOrigen.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -315,18 +328,30 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos.", "Atención", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        if (dateChoosersalida.getDate() == null) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Debe seleccionar una fecha de salida."
+            );
+            return;
+        }
 
         try {
             String origen = txtOrigen.getText();
             origen = VistaPrincipal.formatearNombresApellidos(origen);
             String destino = txtDestino.getText();
             fechaSalida = dateChoosersalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            destino = VistaPrincipal.formatearNombresApellidos(destino);
-            horaSalida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
             
-            if (!horarioValido()) {
+            LocalDate fechaMinima = LocalDate.now().plusDays(7);
+
+            if (fechaSalida.isBefore(fechaMinima)) {
+                JOptionPane.showMessageDialog(this,"La fecha de salida debe ser como mínimo dentro de 7 días.","Fecha no válida",JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
+            destino = VistaPrincipal.formatearNombresApellidos(destino);
+            horaSalida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
             
             LocalTime horaLlegada = LocalTime.parse(txtHoraLlegada.getText());
             double precio = Double.parseDouble(txtPrecioBase.getText());
@@ -415,25 +440,11 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
        txtHoraLlegada.setText(horaLlegada);
     }//GEN-LAST:event_btnCalcHoraLlegadaActionPerformed
 
-    private boolean horarioValido() {
-        if (fechaSalida == null || horaSalida == null) {
-            return false;
-        }
-        
-        if (fechaSalida.equals(LocalDate.now())) {
-            LocalTime horaMinima = LocalTime.now().plusHours(1);
-            
-            if (horaSalida.isBefore(horaMinima)) {
-                JOptionPane.showMessageDialog(
-                        this, 
-                        "Para los viajes con salidas hoy, el horario debe ser como mínimo una hora posterior a la hora actual.", 
-                        "Horario no válido", JOptionPane.WARNING_MESSAGE);
-                return false;
-            }
-        }
-        
-        return true;
-    }
+    private void txtPrecioBaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioBaseKeyTyped
+        // TODO add your handling code here:
+        VistaPrincipal.validarEnteros(evt, txtPrecioBase);
+    }//GEN-LAST:event_txtPrecioBaseKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcHoraLlegada;
