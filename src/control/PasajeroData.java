@@ -77,6 +77,36 @@ public class PasajeroData {
         return null;
     }
     
+    public Pasajero buscarPasajeroId(int id) throws SQLException {
+        String sql = "SELECT * FROM pasajeros WHERE idPasajero = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                int idPasajero = rs.getInt("idPasajero");
+                int dni = rs.getInt("dni");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String correo = rs.getString("correo");
+                String telefono = rs.getString("telefono");
+                boolean estado = rs.getBoolean("estado");
+                
+                Pasajero pasajeroEncontrado = new Pasajero(idPasajero, dni, nombre, apellido, correo, telefono, estado);
+                
+                return pasajeroEncontrado;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("No se pudo encontrar el pasajero." + e.getMessage());
+            throw e;
+        }
+        return null;
+    }
+    
     public void actualizarPasajero(Pasajero pasajero) throws SQLException {
         String sql ="UPDATE pasajeros SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE dni = ?";
         
@@ -168,7 +198,7 @@ public class PasajeroData {
    
    public ArrayList<Pasajero> listarTodosLosPasajeros() throws SQLException{
        ArrayList<Pasajero> todosLosPasajeros = new ArrayList<>();
-       String sql = "SELECT * FROM pasajeros";
+       String sql = "SELECT * FROM pasajeros ORDER BY nombre ASC";
        try {
            PreparedStatement ps = conexion.prepareStatement(sql);
            ResultSet rs = ps.executeQuery();

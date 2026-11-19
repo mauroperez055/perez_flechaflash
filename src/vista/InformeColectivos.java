@@ -142,7 +142,7 @@ public class InformeColectivos extends javax.swing.JInternalFrame {
             ArrayList<Viaje> viajesFiltrados = new ArrayList<>();
             
             for (Viaje viaje : viajes) {
-                String opcion = viaje.getDestino() + " || " + formatearFecha(viaje.getFechaSalida());
+                String opcion = viaje.getDestino() + " || " + formatearFecha(viaje.getFechaSalida()) + " || " + viaje.getHoraSalida();
                 
                 if (opcion.equals(seleccion)) {
                     viajesFiltrados.add(viaje);
@@ -170,7 +170,9 @@ public class InformeColectivos extends javax.swing.JInternalFrame {
             String fecha = formatearFecha(viaje.getFechaSalida());
 
             cboDestinos.addItem(
-                viaje.getDestino() + " || " + fecha
+                viaje.getDestino() + " || " + 
+                fecha + " || " +
+                viaje.getHoraSalida()
             );
             
         }

@@ -52,7 +52,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.colectivoData = new ColectivoData(conexion);
         this.lugarData = new LugarData(conexion);
         this.viajeData = new ViajeData(conexion);
-        this.pasajeData = new PasajeData(conexion);
+        this.pasajeData = new PasajeData(conexion, pasajeroData, viajeData, lugarData);
         
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
@@ -93,7 +93,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnBuscarPasaje = new javax.swing.JButton();
         btnListarPasajePasajero = new javax.swing.JButton();
         btnInformesCole = new javax.swing.JButton();
-        btnListarPasajeFecha = new javax.swing.JButton();
         btnBuscarViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -342,21 +341,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnListarPasajeFecha.setBackground(new java.awt.Color(49, 144, 127));
-        btnListarPasajeFecha.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
-        btnListarPasajeFecha.setForeground(new java.awt.Color(0, 0, 0));
-        btnListarPasajeFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list-ticket.png"))); // NOI18N
-        btnListarPasajeFecha.setText("Listar pasajes por fecha");
-        btnListarPasajeFecha.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnListarPasajeFecha.setContentAreaFilled(false);
-        btnListarPasajeFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnListarPasajeFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnListarPasajeFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarPasajeFechaActionPerformed(evt);
-            }
-        });
-
         btnBuscarViaje.setBackground(new java.awt.Color(49, 144, 127));
         btnBuscarViaje.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         btnBuscarViaje.setForeground(new java.awt.Color(0, 0, 0));
@@ -417,8 +401,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEmitirPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarPasajePasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnListarPasajeFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(btnListarPasajePasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -475,9 +458,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarPasaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListarPasajePasajero)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListarPasajeFecha)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -634,13 +615,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void btnListarPasajePasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajePasajeroActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
-        PasajesPasajero pasajesPasajero = new PasajesPasajero();
-        pasajesPasajero.setVisible(true);
-        escritorio.add(pasajesPasajero);
-        pasajesPasajero.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        
+        try {
+            escritorio.removeAll();
+            PasajesPasajero pasajesPasajero;
+            pasajesPasajero = new PasajesPasajero(pasajeroData, pasajeData);
+            pasajesPasajero.setVisible(true);
+            escritorio.add(pasajesPasajero);
+            pasajesPasajero.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnListarPasajePasajeroActionPerformed
 
     private void btnEmitirPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirPasajeActionPerformed
@@ -663,24 +651,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnBuscarPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPasajeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        BuscarPasaje buscarPasaje = new BuscarPasaje();
+        BuscarPasaje buscarPasaje = new BuscarPasaje(pasajeData);
         buscarPasaje.setVisible(true);
         escritorio.add(buscarPasaje);
         buscarPasaje.moveToFront();
         escritorio.revalidate();
         escritorio.repaint();
     }//GEN-LAST:event_btnBuscarPasajeActionPerformed
-
-    private void btnListarPasajeFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajeFechaActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
-        ListadoPasajesFecha pasajeFecha = new ListadoPasajesFecha();
-        pasajeFecha.setVisible(true);
-        escritorio.add(pasajeFecha);
-        pasajeFecha.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
-    }//GEN-LAST:event_btnListarPasajeFechaActionPerformed
 
     private void btnBuscarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarViajeActionPerformed
         // TODO add your handling code here:
@@ -1048,7 +1025,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEmitirPasaje;
     private javax.swing.JButton btnInformesCole;
     private javax.swing.JButton btnListarCole;
-    private javax.swing.JButton btnListarPasajeFecha;
     private javax.swing.JButton btnListarPasajePasajero;
     private javax.swing.JButton btnListarPasajeros;
     private javax.swing.JButton btnListarViajes;
