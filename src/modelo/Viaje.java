@@ -14,14 +14,16 @@ public class Viaje {
     private Colectivo colectivo;
     private double precio;
     private boolean activo;
+    private LocalDate fechaSalida;
 
     public Viaje() {
     }
 
-    public Viaje(int idViaje, String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+    public Viaje(int idViaje, String origen, String destino, LocalDate fechaSalida, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
         this.idViaje = idViaje;
         this.origen = origen;
         this.destino = destino;
+        this.fechaSalida = fechaSalida;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
         this.colectivo = colectivo;
@@ -29,9 +31,10 @@ public class Viaje {
         this.activo = activo;
     }
 
-    public Viaje(String origen, String destino, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
+    public Viaje(String origen, String destino, LocalDate fechaSalida, Time horaSalida, Time horaLlegada, Colectivo colectivo, double precio, boolean activo) {
         this.origen = origen;
         this.destino = destino;
+        this.fechaSalida = fechaSalida;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
         this.colectivo = colectivo;
@@ -63,6 +66,14 @@ public class Viaje {
         this.destino = destino;
     }
 
+    public LocalDate getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(LocalDate fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+    
     public Time getHoraSalida() {
         return horaSalida;
     }

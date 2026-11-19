@@ -4,9 +4,13 @@ package vista;
 import control.ColectivoData;
 import control.Conexion;
 import control.LugarData;
+import control.PasajeData;
 import control.PasajeroData;
 import control.ViajeData;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -14,8 +18,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,6 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Colectivo;
 import modelo.Lugar;
+import modelo.Pasajero;
 import modelo.Viaje;
 
 public class VistaPrincipal extends javax.swing.JFrame {
@@ -35,6 +42,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private ColectivoData colectivoData;
     private LugarData lugarData;
     private ViajeData viajeData;
+    private PasajeData pasajeData;
     private Conexion conexion;
 
     public VistaPrincipal() {
@@ -44,6 +52,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.colectivoData = new ColectivoData(conexion);
         this.lugarData = new LugarData(conexion);
         this.viajeData = new ViajeData(conexion);
+        this.pasajeData = new PasajeData(conexion);
         
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
@@ -514,7 +523,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnListarPasajerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPasajerosActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        ListadoPasajeros listarPasajeros = new ListadoPasajeros();
+        ListadoPasajeros listarPasajeros = new ListadoPasajeros(pasajeroData);
         listarPasajeros.setVisible(true);
         escritorio.add(listarPasajeros);
         listarPasajeros.moveToFront();
@@ -631,12 +640,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnEmitirPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirPasajeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        EmitirPasaje emitirPasaje = new EmitirPasaje();
-        emitirPasaje.setVisible(true);
-        escritorio.add(emitirPasaje);
-        emitirPasaje.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        EmitirPasaje emitirPasaje;
+        try {
+            emitirPasaje = new EmitirPasaje(viajeData, pasajeroData, lugarData, pasajeData);
+            emitirPasaje.setVisible(true);
+            escritorio.add(emitirPasaje);
+            emitirPasaje.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnEmitirPasajeActionPerformed
 
     private void btnBuscarPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPasajeActionPerformed
@@ -848,11 +863,29 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 viaje.getIdViaje(),
                 viaje.getOrigen(),
                 viaje.getDestino(),
+                viaje.getFechaSalida().toString(),
                 viaje.getHoraSalida(),
                 viaje.getHoraLlegada(),
                 viaje.getColectivo().getIdColectivo() + " - " + viaje.getColectivo().getMatricula(),
                 viaje.getColectivo().getChofer(),
                 "$ " + viaje.getPrecio()
+            });
+        }
+        
+    }
+    
+    public static void cargarTablaPasajeros(ArrayList<Pasajero> pasajeros, JTable jTable) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        borraFilasTabla(modelo);
+        for (Pasajero pas : pasajeros) {
+            modelo.addRow(new Object[] {
+                pas.getIdPasajero(),
+                pas.getDni(),
+                pas.getNombre(),
+                pas.getApellido(),
+                pas.getCorreo(),
+                pas.getTelefono(),
+                pas.isActivo()
             });
         }
         
@@ -893,17 +926,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         return horaLlegadaString;
     }
     
-    // si no lo uso borrar
-    public static boolean validarHoraFechaViajes(LocalDate fechaSalida, LocalDate fechaLlegada, LocalTime horaSalida, LocalTime horaLlegada) {
-        LocalDateTime salida = LocalDateTime.of(fechaSalida, horaSalida);
-        LocalDateTime llegada = LocalDateTime.of(fechaLlegada, horaLlegada);
-        
-        if (!llegada.isAfter(salida)) {
-            return false;
-        }
-        
-        return true;
-    }
+//    // si no lo uso borrar
+//    public static boolean validarHoraFechaViajes(LocalDate fechaSalida, LocalDate fechaLlegada, LocalTime horaSalida, LocalTime horaLlegada) {
+//        LocalDateTime salida = LocalDateTime.of(fechaSalida, horaSalida);
+//        LocalDateTime llegada = LocalDateTime.of(fechaLlegada, horaLlegada);
+//        
+//        if (!llegada.isAfter(salida)) {
+//            return false;
+//        }
+//        
+//        return true;
+//    }
     
     public static ArrayList<Lugar> crearLugares(int cantidad, Viaje viaje) throws SQLException {
         int numeroAsiento = 0;
@@ -916,6 +949,66 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
         
         return lugaresCreados;
+    }
+    
+    public static ArrayList<JButton> mostrarAsientos(ArrayList<Lugar> lugares, JPanel pnlAsientos) {
+        pnlAsientos.removeAll();
+        
+        pnlAsientos.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+        
+        ArrayList<JButton> botonesAsientos = new ArrayList<>();
+        
+        for (Lugar lugar : lugares) {
+            JButton btnAsiento = new JButton(String.valueOf(lugar.getNumeroAsiento()));
+            btnAsiento.setPreferredSize(new Dimension(40, 35));
+            
+            if (lugar.isActivo()) {
+                btnAsiento.setBackground(new Color(144, 238, 144));
+                btnAsiento.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            } else {
+                btnAsiento.setBackground(new Color(220, 80, 80));
+                btnAsiento.setEnabled(false);
+                btnAsiento.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            
+            btnAsiento.setOpaque(true);
+            btnAsiento.setBorderPainted(false);
+            
+            pnlAsientos.add(btnAsiento);
+            botonesAsientos.add(btnAsiento);
+        }
+        
+        pnlAsientos.revalidate();
+        pnlAsientos.repaint();
+        
+        return botonesAsientos;
+    }
+    
+    public static ArrayList<JButton> mostrarAsientosConsultar(ArrayList<Lugar> lugares, JPanel pnlAsientos) {
+        pnlAsientos.removeAll();
+        
+        pnlAsientos.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
+        
+        ArrayList<JButton> botonesAsientos = new ArrayList<>();
+        
+        for (Lugar lugar : lugares) {
+            JButton btnAsiento = new JButton(String.valueOf(lugar.getNumeroAsiento()));
+            btnAsiento.setPreferredSize(new Dimension(40, 35));
+            
+            if (lugar.isActivo()) {
+                btnAsiento.setBackground(Color.GREEN);
+            } else {
+                btnAsiento.setBackground(Color.RED);
+            }
+            
+            pnlAsientos.add(btnAsiento);
+            botonesAsientos.add(btnAsiento);
+        }
+        
+        pnlAsientos.revalidate();
+        pnlAsientos.repaint();
+        
+        return botonesAsientos;
     }
     
     public static void main(String args[]) {

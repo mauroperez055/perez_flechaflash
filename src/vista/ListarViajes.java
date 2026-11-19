@@ -3,6 +3,8 @@ package vista;
 
 import control.ViajeData;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -82,17 +84,17 @@ public class ListarViajes extends javax.swing.JInternalFrame {
 
         tblViajes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID viaje", "Origen", "Destino", "Hora Salida", "Hora Llegada", "Colectivo", "Chofer", "Precio base"
+                "ID viaje", "Origen", "Destino", "Fecha Salida", "Hora Salida", "Hora Llegada", "Colectivo", "Chofer", "Precio base"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -269,6 +271,7 @@ public class ListarViajes extends javax.swing.JInternalFrame {
             System.getLogger(ListarViajes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_cboDestinoItemStateChanged
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import modelo.Viaje;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         chbxEstado.setEnabled(false);
         txtLugares.setEditable(false);
         txtHoraLlegada.setEditable(false);
+        txtFechaSalida.setEnabled(false);
+        txtFechaSalida.setEditable(false);
 //        txtHoraSalida.setEditable(false);
         txtDuracion.setEditable(false);
         
@@ -81,6 +84,8 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         cboHoraSalida = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        txtFechaSalida = new javax.swing.JTextField();
         btnBuscarViaje = new javax.swing.JButton();
         pnlButtons = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
@@ -180,6 +185,11 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel13.setText("Fecha de salida:");
+
+        txtFechaSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
@@ -193,7 +203,9 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
@@ -201,34 +213,29 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                                     .addComponent(chbxEstado)
                                     .addComponent(txtLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cboColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCambiarCole))
-                            .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                            .addComponent(txtDestino))
-                        .addGap(103, 103, 103))
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
                                 .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCambiarHoraSalida))
                             .addGroup(pnlDatosLayout.createSequentialGroup()
                                 .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12)))
-                        .addGap(96, 96, 96)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12))))
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(txtDestino)
+                            .addComponent(txtFechaSalida))
+                        .addGap(103, 103, 103)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -244,30 +251,27 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel5))
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCambiarHoraSalida))))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiarHoraSalida)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btnCambiarCole)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addComponent(cboColectivos)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCambiarCole))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,24 +400,24 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarViaje)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtBuscarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscarViaje))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)))
+                        .addGap(0, 217, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
+                .addGap(21, 21, 21)
+                .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -432,7 +436,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -467,6 +471,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 if (viajeData.tienePasajes(viajeEncontrado.getIdViaje())) {
                     VistaPrincipal.desactivarBotones(pnlButtons);
                     btnCambiarHoraSalida.setEnabled(false);
+                    btnCambiarCole.setEnabled(false);
                     cargarCboColes(cboColectivos);
                     cargarCboHorarioSalida(cboHoraSalida);
                     JOptionPane.showMessageDialog(
@@ -498,6 +503,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             
             txtOrigen.setText(viajeEncontrado.getOrigen());
             txtDestino.setText(viajeEncontrado.getDestino());
+            txtFechaSalida.setText(viajeEncontrado.getFechaSalida().toString());
             
             LocalTime horaSalida = viajeEncontrado.getHoraSalida().toLocalTime();
             LocalTime horaLlegada = viajeEncontrado.getHoraLlegada().toLocalTime();
@@ -555,6 +561,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
             int idViaje = viajeEncontrado.getIdViaje();
             String origen = VistaPrincipal.formatearNombresApellidos(txtOrigen.getText());
             String destino = VistaPrincipal.formatearNombresApellidos(txtDestino.getText());
+            LocalDate fechaSalida = viajeEncontrado.getFechaSalida();
             LocalTime horaSalidaElegida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
             int duracion = Integer.parseInt(txtDuracion.getText());
             LocalTime horaLlegada = horaSalidaElegida.plusMinutes(duracion);
@@ -567,7 +574,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 coleElegido = viajeEncontrado.getColectivo();
             }
             
-            viajeActualizado = new Viaje(idViaje, origen, destino, Time.valueOf(horaSalidaElegida), Time.valueOf(horaLlegada), coleElegido, precio, estado);
+            viajeActualizado = new Viaje(idViaje, origen, destino, fechaSalida, Time.valueOf(horaSalidaElegida), Time.valueOf(horaLlegada), coleElegido, precio, estado);
             
             /* verifico que el colectivo que elegi este disponible */
             String error = viajeData.verificarDisponibilidad(viajeActualizado);
@@ -591,27 +598,28 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
                 for (Lugar lugar : lugaresCreados) {
                     lugarData.crearLugar(lugar);
                 }
-                
-                viajeData.actualizarViaje(viajeActualizado);
-                
-                JOptionPane.showMessageDialog(this, "El viaje fue actualizado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                
-                /* reinicio la vista*/
-                VistaPrincipal.limpiarCampos(pnlDatos);
-                VistaPrincipal.desActivarCampos(pnlDatos, false);
-                chbxEstado.setSelected(false);
-                txtBuscarViaje.setText("");
-                VistaPrincipal.desactivarBotones(pnlButtons);
-                btnCambiarCole.setEnabled(false);
-                btnCambiarHoraSalida.setEnabled(false);
-                
-                cboColectivos.removeAllItems();
-                cboHoraSalida.removeAllItems();
-                
-                viajeEncontrado = null;
-                viajeActualizado = null;
-                coleElegido = null;
             } 
+            
+            viajeData.actualizarViaje(viajeActualizado);
+
+            JOptionPane.showMessageDialog(this, "El viaje fue actualizado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            /* reinicio la vista*/
+            VistaPrincipal.limpiarCampos(pnlDatos);
+            VistaPrincipal.desActivarCampos(pnlDatos, false);
+            chbxEstado.setSelected(false);
+            txtBuscarViaje.setText("");
+            VistaPrincipal.desactivarBotones(pnlButtons);
+            btnCambiarCole.setEnabled(false);
+            btnCambiarHoraSalida.setEnabled(false);
+
+            cboColectivos.removeAllItems();
+            cboHoraSalida.removeAllItems();
+
+            viajeEncontrado = null;
+            viajeActualizado = null;
+            coleElegido = null;
+            
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar el viaje", "Atención", JOptionPane.ERROR_MESSAGE);
@@ -784,6 +792,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -798,6 +807,7 @@ public class BuscarViaje extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscarViaje;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtFechaSalida;
     private javax.swing.JTextField txtHoraLlegada;
     private javax.swing.JTextField txtLugares;
     private javax.swing.JTextField txtOrigen;

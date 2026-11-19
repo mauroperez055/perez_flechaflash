@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Colectivo;
 import modelo.Lugar;
@@ -24,6 +26,8 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
     private LugarData lugarData;
     private ViajeData viajeData;
     private ArrayList<Lugar> lugaresCreados;
+    private LocalDate fechaSalida;
+    private LocalTime horaSalida;
     
     public RegistrarViajeNueva(ColectivoData colectivoData, LugarData lugarData, ViajeData viajeData) throws SQLException {
         initComponents();
@@ -34,6 +38,8 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
         
         txtHoraLlegada.setEditable(false);
         txtLugares.setEditable(false);
+        dateChoosersalida.getDateEditor().setEnabled(false);
+        dateChoosersalida.setMinSelectableDate(new Date());
         
         VistaPrincipal.cargarCboxHorariosSalida(cboHoraSalida);
         
@@ -68,6 +74,8 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
         txtHoraLlegada = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btnCalcHoraLlegada = new javax.swing.JButton();
+        dateChoosersalida = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
         btnGuardarViaje = new javax.swing.JButton();
 
         setClosable(true);
@@ -153,6 +161,9 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel6.setText("Fecha de salida:");
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
@@ -163,25 +174,20 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDestino, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addComponent(txtOrigen))
-                            .addGroup(pnlDatosLayout.createSequentialGroup()
-                                .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
-                            .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDestino, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                            .addComponent(txtOrigen)))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboColectivos, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,9 +197,16 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPrecioBase, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlDatosLayout.createSequentialGroup()
-                                .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCalcHoraLlegada)))))
+                                .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4))
+                            .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dateChoosersalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDatosLayout.createSequentialGroup()
+                                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnCalcHoraLlegada))))))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -208,15 +221,19 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateChoosersalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,12 +320,18 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             String origen = txtOrigen.getText();
             origen = VistaPrincipal.formatearNombresApellidos(origen);
             String destino = txtDestino.getText();
+            fechaSalida = dateChoosersalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             destino = VistaPrincipal.formatearNombresApellidos(destino);
-            LocalTime horaSalida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
+            horaSalida = LocalTime.parse(cboHoraSalida.getSelectedItem().toString());
+            
+            if (!horarioValido()) {
+                return;
+            }
+            
             LocalTime horaLlegada = LocalTime.parse(txtHoraLlegada.getText());
             double precio = Double.parseDouble(txtPrecioBase.getText());
             
-            Viaje viajeNuevo = new Viaje(origen, destino, Time.valueOf(horaSalida), Time.valueOf(horaLlegada), colectivoSeleccionado, precio, true);
+            Viaje viajeNuevo = new Viaje(origen, destino, fechaSalida, Time.valueOf(horaSalida), Time.valueOf(horaLlegada), colectivoSeleccionado, precio, true);
             
             // verifico la disponiblidad
             String error = viajeData.verificarDisponibilidad(viajeNuevo);
@@ -332,6 +355,7 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(this, "Viaje creado.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             VistaPrincipal.limpiarCampos(pnlDatos);
+            dateChoosersalida.setDate(null);
             return;
             
         } catch (SQLException e) {
@@ -391,12 +415,32 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
        txtHoraLlegada.setText(horaLlegada);
     }//GEN-LAST:event_btnCalcHoraLlegadaActionPerformed
 
+    private boolean horarioValido() {
+        if (fechaSalida == null || horaSalida == null) {
+            return false;
+        }
+        
+        if (fechaSalida.equals(LocalDate.now())) {
+            LocalTime horaMinima = LocalTime.now().plusHours(1);
+            
+            if (horaSalida.isBefore(horaMinima)) {
+                JOptionPane.showMessageDialog(
+                        this, 
+                        "Para los viajes con salidas hoy, el horario debe ser como mínimo una hora posterior a la hora actual.", 
+                        "Horario no válido", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }
+        
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcHoraLlegada;
     private javax.swing.JButton btnGuardarViaje;
     private javax.swing.JComboBox<String> cboColectivos;
     private javax.swing.JComboBox<String> cboHoraSalida;
+    private com.toedter.calendar.JDateChooser dateChoosersalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -406,6 +450,7 @@ public class RegistrarViajeNueva extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel pnlDatos;

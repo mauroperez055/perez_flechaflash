@@ -6,9 +6,10 @@ import control.LugarData;
 import control.ViajeData;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,21 +21,21 @@ import modelo.Viaje;
 public class ConsultarAsientos extends javax.swing.JInternalFrame {
 
     private ArrayList<Viaje> viajesActivos;
-//    private ColectivoData colectivoData;
     private ViajeData viajeData;
     private Viaje viajeSeleccionado;
     private LugarData lugarData;
+    
     
     public ConsultarAsientos(ViajeData viajeData, ColectivoData colectivoData, LugarData lugarData) throws SQLException {
         initComponents();
         this.viajeData = viajeData;
         this.viajesActivos = viajeData.listarViajesActivos();
         this.lugarData = lugarData;
-//        this.colectivoData = colectivoData;
 
         txtColectivo.setEditable(false);
         cargarCboViajes(cboViajes);
-        
+        txtDisponible.setEditable(false);
+        txtVendido.setEditable(false);
         
         jScrollPane1.setPreferredSize(new Dimension(826, 227));
         jScrollPane1.setMinimumSize(new Dimension(826, 227));
@@ -53,8 +54,8 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtDisponible = new javax.swing.JTextField();
+        txtVendido = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlAsientos = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -78,13 +79,13 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel1.setText("Consultar asientos disponibles y vendidos");
 
-        jTextField1.setBackground(new java.awt.Color(0, 162, 0));
-        jTextField1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jTextField1.setText("Disponible");
+        txtDisponible.setBackground(new java.awt.Color(0, 237, 0));
+        txtDisponible.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        txtDisponible.setText("Disponible");
 
-        jTextField2.setBackground(new java.awt.Color(255, 0, 0));
-        jTextField2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jTextField2.setText("Vendido");
+        txtVendido.setBackground(new java.awt.Color(255, 0, 0));
+        txtVendido.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        txtVendido.setText("Vendido");
 
         pnlAsientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -190,7 +191,7 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cboViajes, 0, 381, Short.MAX_VALUE)))
+                        .addComponent(cboViajes, 0, 468, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlPrincipalLayout.setVerticalGroup(
@@ -228,26 +229,27 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
                                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(282, 282, 282)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
                 .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,8 +257,8 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -270,15 +272,16 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
         if (evt.getStateChange() != java.awt.event.ItemEvent.SELECTED) {
                 return;
         }
-        
-        
+ 
         try {
             String itemSeleccionado = cboViajes.getSelectedItem().toString();
 
             if (itemSeleccionado == null || itemSeleccionado.equals("--")) {
-                //aca podria reiniciar la vista
                 VistaPrincipal.limpiarCampos(pnlDatos);
                 txtColectivo.setText("");
+                pnlAsientos.removeAll();
+                pnlAsientos.revalidate();
+                pnlAsientos.repaint();
                 return;
             }
 
@@ -289,7 +292,12 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
             viajeSeleccionado = viajeData.buscarViaje(idViaje);
             
             Colectivo cole = viajeSeleccionado.getColectivo();
-            txtColectivo.setText(cole.getIdColectivo() + " - " + cole.getMatricula() + " - " + cole.getCapacidad() + " lugares");
+            txtColectivo.setText(
+                    cole.getIdColectivo() + " - " + 
+                    "Mat: " + cole.getMatricula() +  
+                    " - Chofer: " + cole.getChofer() + " - " +
+                    cole.getCapacidad() + " lugares"
+            );
             
             txtOrigen.setText(viajeSeleccionado.getOrigen());
             txtDestino.setText(viajeSeleccionado.getDestino());
@@ -297,8 +305,9 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
             txtHoraLlegada.setText(viajeSeleccionado.getHoraLlegada().toString());
             
             ArrayList<Lugar> lugares = lugarData.listarLugaresPorViaje(viajeSeleccionado);
-            
-            mostrarAsientos(lugares);
+
+            VistaPrincipal.mostrarAsientosConsultar(lugares, pnlAsientos);
+ 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo obtener informacion del viaje.", "Atención", JOptionPane.ERROR_MESSAGE);
             //aca reinicio la vista tambien
@@ -307,44 +316,27 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cboViajesItemStateChanged
 
-    private void mostrarAsientos(ArrayList<Lugar> lugares) {
-        pnlAsientos.removeAll();
-        
-        pnlAsientos.setLayout(new java.awt.GridLayout(0, 5, 10, 10));
-        
-        for (Lugar lugar : lugares) {
-            JButton btnAsiento = new JButton(String.valueOf(lugar.getNumeroAsiento()));
-            btnAsiento.setPreferredSize(new Dimension(40, 35));
-            
-            if (lugar.isActivo()) {
-                btnAsiento.setBackground(Color.GREEN);
-            } else {
-                btnAsiento.setBackground(Color.RED);
-            }
-            
-            btnAsiento.setOpaque(true);
-            btnAsiento.setBorderPainted(false);
-            
-            pnlAsientos.add(btnAsiento);
-        }
-        
-        pnlAsientos.revalidate();
-        pnlAsientos.repaint();
-    }
-    
     private void cargarCboViajes(JComboBox cboViajes) {
         LocalTime hora = LocalTime.of(00, 00);
+        String fecha;
         for (Viaje viaje : viajesActivos) {
+            fecha = formatearFecha(viaje.getFechaSalida());
             hora = viaje.getHoraSalida().toLocalTime();
             cboViajes.addItem(
                     viaje.getOrigen() + " >> " + 
-                    viaje.getDestino() + " | horario: " + hora + " | N° " + 
-                    viaje.getIdViaje()          
+                    viaje.getDestino() + " | horario: " + hora + " | Fecha: " + 
+                    fecha + " | N° " + 
+                    viaje.getIdViaje()
             );
         }
 
     }
 
+    private String formatearFecha(LocalDate fecha) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        return fecha.format(formato);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboViajes;
@@ -358,15 +350,15 @@ public class ConsultarAsientos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel pnlAsientos;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTextField txtColectivo;
     private javax.swing.JTextField txtDestino;
+    private javax.swing.JTextField txtDisponible;
     private javax.swing.JTextField txtHoraLlegada;
     private javax.swing.JTextField txtHoraSalida;
     private javax.swing.JTextField txtOrigen;
+    private javax.swing.JTextField txtVendido;
     // End of variables declaration//GEN-END:variables
 }

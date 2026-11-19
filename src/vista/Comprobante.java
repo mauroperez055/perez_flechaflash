@@ -30,27 +30,23 @@ public class Comprobante extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtPasajero = new javax.swing.JTextField();
-        txtDni = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtFechaHora = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtOrigen = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtDestino = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtNumPasaje = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtSalida = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtLlegada = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtNumAsiento = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtCategoría = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        txtFechaHoraPasaje = new javax.swing.JTextField();
+        txtOrigen = new javax.swing.JTextField();
+        txtDestino = new javax.swing.JTextField();
+        txtfechaSalida = new javax.swing.JTextField();
+        txtNumAsiento = new javax.swing.JTextField();
+        txtPasajero = new javax.swing.JTextField();
+        txtNumPasaje = new javax.swing.JTextField();
         txtPrecioFinal = new javax.swing.JTextField();
+        txtColeectivo = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
@@ -64,179 +60,127 @@ public class Comprobante extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("Pasajero:");
 
-        txtPasajero.setEditable(false);
-        txtPasajero.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtPasajero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtDni.setEditable(false);
-        txtDni.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtDni.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel4.setText("Dni:");
-
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("Fecha y hora:");
-
-        txtFechaHora.setEditable(false);
-        txtFechaHora.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtFechaHora.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel7.setText("Origen:");
 
-        txtOrigen.setEditable(false);
-        txtOrigen.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtOrigen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel8.setText("Destino:");
-
-        txtDestino.setEditable(false);
-        txtDestino.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtDestino.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel9.setText("N° pasaje:");
 
-        txtNumPasaje.setEditable(false);
-        txtNumPasaje.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtNumPasaje.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("Salida:");
-
-        txtSalida.setEditable(false);
-        txtSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtSalida.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel10.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel10.setText("Llegada:");
-
-        txtLlegada.setEditable(false);
-        txtLlegada.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtLlegada.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel11.setText("Número de asiento:");
 
-        txtNumAsiento.setEditable(false);
-        txtNumAsiento.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtNumAsiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel12.setText("Categoría:");
-
-        txtCategoría.setEditable(false);
-        txtCategoría.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        txtCategoría.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel13.setText("Precio Final:");
 
+        txtFechaHoraPasaje.setEditable(false);
+        txtFechaHoraPasaje.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtOrigen.setEditable(false);
+        txtOrigen.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtDestino.setEditable(false);
+        txtDestino.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtfechaSalida.setEditable(false);
+        txtfechaSalida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtNumAsiento.setEditable(false);
+        txtNumAsiento.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtPasajero.setEditable(false);
+        txtPasajero.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        txtNumPasaje.setEditable(false);
+        txtNumPasaje.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
         txtPrecioFinal.setEditable(false);
-        txtPrecioFinal.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        txtPrecioFinal.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         txtPrecioFinal.setText("$");
-        txtPrecioFinal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtColeectivo.setEditable(false);
+        txtColeectivo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel14.setText("Colectivo");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSalida))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtLlegada))))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNumAsiento)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCategoría, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDni)))
-                .addContainerGap())
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jLabel13)
+                .addGap(83, 83, 83)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtColeectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaHoraPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtfechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaHoraPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtNumPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtNumAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtCategoría, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
                     .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtfechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtColeectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNumAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(txtPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtPrecioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,7 +190,7 @@ public class Comprobante extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,8 +202,8 @@ public class Comprobante extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -268,29 +212,25 @@ public class Comprobante extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JTextField txtCategoría;
+    private javax.swing.JTextField txtColeectivo;
     private javax.swing.JTextField txtDestino;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtFechaHora;
-    private javax.swing.JTextField txtLlegada;
+    private javax.swing.JTextField txtFechaHoraPasaje;
     private javax.swing.JTextField txtNumAsiento;
     private javax.swing.JTextField txtNumPasaje;
     private javax.swing.JTextField txtOrigen;
     private javax.swing.JTextField txtPasajero;
     private javax.swing.JTextField txtPrecioFinal;
-    private javax.swing.JTextField txtSalida;
+    private javax.swing.JTextField txtfechaSalida;
     // End of variables declaration//GEN-END:variables
 }

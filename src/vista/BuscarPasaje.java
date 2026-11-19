@@ -65,7 +65,7 @@ public class BuscarPasaje extends javax.swing.JInternalFrame {
         );
         mostrarCompLayout.setVerticalGroup(
             mostrarCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPasajeEncontradoLayout = new javax.swing.GroupLayout(pnlPasajeEncontrado);

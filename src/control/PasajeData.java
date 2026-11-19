@@ -18,7 +18,8 @@ public class PasajeData {
     }
     
     public void crearPasaje(Pasaje pasaje) throws SQLException {
-        String sql = "INSERT INTO pasajes VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasajes (idPasajero, idLugar, idViaje, fechaVenta, horaVenta, precio, estado) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
