@@ -601,12 +601,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnInformesColeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesColeActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
-        InformeColectivos informeColes = new InformeColectivos();
-        informeColes.setVisible(true);
-        escritorio.add(informeColes);
-        informeColes.moveToFront();
-        escritorio.revalidate();
-        escritorio.repaint();
+        InformeColectivos informeColes;
+        try {
+            informeColes = new InformeColectivos(colectivoData, viajeData, lugarData);
+            informeColes.setVisible(true);
+            escritorio.add(informeColes);
+            informeColes.moveToFront();
+            escritorio.revalidate();
+            escritorio.repaint();
+        } catch (SQLException ex) {
+            System.getLogger(VistaPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
     }//GEN-LAST:event_btnInformesColeActionPerformed
 
     private void btnConsultarLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarLugaresActionPerformed
